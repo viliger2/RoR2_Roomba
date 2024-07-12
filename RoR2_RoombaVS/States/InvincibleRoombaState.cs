@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace RoR2_Roomba
+namespace RoR2_Roomba.States
 {
     public class InvincibleRoombaState : EntityStates.Idle
     {
@@ -14,7 +14,7 @@ namespace RoR2_Roomba
             base.OnEnter();
             if (NetworkServer.active)
             {
-                characterBody.AddBuff(RoR2.RoR2Content.Buffs.HiddenInvincibility);
+                characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
             }
         }
     }

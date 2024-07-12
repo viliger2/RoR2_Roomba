@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace RoR2_Roomba
+namespace RoR2_Roomba.States
 {
     public class WanderFar : Wander
     {
@@ -29,12 +29,12 @@ namespace RoR2_Roomba
                 bodyCharacterMotor = ai.bodyCharacterMotor;
                 bodySkillLocator = ai.bodySkillLocator;
             }
-            bodyInputs = default(BaseAI.BodyInputs);
+            bodyInputs = default;
             // end copy-paste
 
-            if ((bool)base.ai && (bool)base.body)
+            if ((bool)ai && (bool)body)
             {
-                BroadNavigationSystem.Agent broadNavigationAgent = base.ai.broadNavigationAgent;
+                BroadNavigationSystem.Agent broadNavigationAgent = ai.broadNavigationAgent;
                 SetNewRandomTarget(broadNavigationAgent);
                 aiUpdateTimer = 0.16f;
             }
@@ -84,7 +84,7 @@ namespace RoR2_Roomba
                     float num = body.radius * body.radius * 4f;
                     flag = sqrMagnitude > num;
                 }
-                if(refreshTimer <= 0f || !flag)
+                if (refreshTimer <= 0f || !flag)
                 {
                     refreshTimer = refreshTime;
                     SetNewRandomTarget(broadNavigationAgent);
@@ -102,7 +102,7 @@ namespace RoR2_Roomba
             var nodeList = nodeGraph.FindNodesInRange(bodyTransform.position, 0f, float.PositiveInfinity, (HullMask)(1 << (int)body.hullClassification));
 
             NodeGraph.NodeIndex node = nodeList[UnityEngine.Random.Range(0, nodeList.Count)];
-            if(nodeGraph.GetNodePosition(node, out var position))
+            if (nodeGraph.GetNodePosition(node, out var position))
             {
                 return position;
             }

@@ -8,6 +8,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RoR2.Projectile;
+using static RoR2_Roomba.RoombaConfigs;
 
 namespace RoR2_Roomba
 {
@@ -19,12 +20,13 @@ namespace RoR2_Roomba
         public const string Version = "1.0.0";
         public const string GUID = "com." + Author + "." + ModName;
 
-        public static ConfigEntry<float> RoombaSpawnChance;
-        public static ConfigEntry<bool> MakeVoidExplosionBypassArmor;
+
 
         private void Awake()
         {
-            PopulateConfigs();
+            Log.Init(Logger);
+
+            RoombaConfigs.PopulateConfigs(Config);
 
             // fixing hopoo's shit
             var neutralTeam = RoR2.TeamCatalog.GetTeamDef(TeamIndex.Neutral);
@@ -58,12 +60,6 @@ namespace RoR2_Roomba
             }
         }
 
-        private void PopulateConfigs()
-        {
-            RoombaSpawnChance = Config.Bind("Roomba", "Chance To Spawn", 30f, "Chance of Roomba to spawn on stage start.");
-            MakeVoidExplosionBypassArmor = Config.Bind("Void Death", "Make Void Explosion Bypass Armor", true, "Add BypassArmor flag to all void explosions that result in instant death. Used so you can kill Roomba with it.");
-        }
-
         private void SceneDirector_onPostPopulateSceneServer(RoR2.SceneDirector sceneDirector)
         {
             if (!RoR2.SceneInfo.instance.countsAsStage)
@@ -74,8 +70,15 @@ namespace RoR2_Roomba
             float value = sceneDirector.rng.RangeFloat(0f, 100f);
             if (value < RoombaSpawnChance.Value)
             {
+                WeightedSelection<CharacterSpawnCard> roombaSelection = new WeightedSelection<CharacterSpawnCard>();
+                roombaSelection.AddChoice(RoombaFactory.cscRoomba, RoombaNothingWeight.Value);
+                roombaSelection.AddChoice(RoombaFactory.cscRoombaMaxwell, RoombaMaxwellWeight.Value);
+                roombaSelection.AddChoice(RoombaFactory.cscRoombaTV, RoombaTVWeight.Value);
+
+                var spawnCard = roombaSelection.Evaluate(sceneDirector.rng.nextNormalizedFloat);
+
                 var spawnRequest = new DirectorSpawnRequest(
-                    RoombaFactory.cscRoomba, 
+                    spawnCard, 
                     new DirectorPlacementRule
                     {
                         placementMode = DirectorPlacementRule.PlacementMode.Random

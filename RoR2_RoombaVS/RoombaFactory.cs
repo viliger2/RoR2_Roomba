@@ -2,7 +2,9 @@
 using KinematicCharacterController;
 using RoR2;
 using RoR2.CharacterAI;
+using RoR2.EntityLogic;
 using RoR2.Networking;
+using RoR2_Roomba.States;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -14,23 +16,22 @@ namespace RoR2_Roomba
 {
     public class RoombaFactory
     {
-        public static CharacterSpawnCard cscRoomba { private set; get; }
-       
+        public static CharacterSpawnCard cscRoomba { internal set; get; }
+        public static CharacterSpawnCard cscRoombaMaxwell { internal set; get; }
+        public static CharacterSpawnCard cscRoombaTV { internal set; get; }
+
         public GameObject CreateRoombaBody(GameObject roombaPrefab)
         {
-            //foreach(Transform child in roombaPrefab.transform)
-            //{
-            //    Debug.Log(child);
-            //}
-
-
             Transform modelBase = roombaPrefab.transform.Find("ModelBase");
-            //if (!modelBase) { Debug.Log("oioioioioi"); };
             Transform aimOrigin = roombaPrefab.transform.Find("ModelBase/AimOrigin");
             Transform modelTransform = roombaPrefab.transform.Find("ModelBase/mdlRoomba");
             Transform mainHurtBoxTransform = roombaPrefab.transform.Find("ModelBase/mdlRoomba/MainHurtBox");
             Transform focusPointTransform = roombaPrefab.transform.Find("ModelBase/mdlRoomba/LogBookTarget");
             Transform cameraPositionTransform = roombaPrefab.transform.Find("ModelBase/mdlRoomba/LogBookTarget/LogBookCamera");
+            Transform maxwell = roombaPrefab.transform.Find("ModelBase/mdlRoomba/maxwell");
+            Transform tv = roombaPrefab.transform.Find("ModelBase/mdlRoomba/TVPrefab");
+            if(!tv) { Log.Error("oioioioi tv"); };
+            if (!maxwell) { Log.Error("oioioioi maxwell"); };
 
             Renderer renderer = roombaPrefab.transform.Find("ModelBase/mdlRoomba/roomba").gameObject.GetComponent<MeshRenderer>();
 
@@ -51,7 +52,7 @@ namespace RoR2_Roomba
             characterMotor.characterDirection = characterDirection;
             characterMotor.muteWalkMotion = true;
             characterMotor.mass = 100f;
-            characterMotor.airControl = 0.25f;
+            characterMotor.airControl = 0.05f;
             characterMotor.generateParametersOnAwake = true;
             #endregion
 
@@ -70,7 +71,7 @@ namespace RoR2_Roomba
             characterBody.mainRootSpeed = 33;
 
             characterBody.baseMaxHealth = 200;
-            characterBody.baseMoveSpeed = 10;
+            characterBody.baseMoveSpeed = 5;
             characterBody.baseAcceleration = 180;
             characterBody.baseJumpPower = 16;
             characterBody.baseDamage = 0;
@@ -100,21 +101,21 @@ namespace RoR2_Roomba
             modelLocator.autoUpdateModelTransform = true;
             modelLocator.normalizeToFloor = true;
             modelLocator.normalSmoothdampTime = 0.1f;
-            modelLocator.normalMaxAngleDelta = 90f;
+            modelLocator.normalMaxAngleDelta = 60f;
             #endregion
 
             #region EntityStateMachine_Body
             var entityStateMachineBody = roombaPrefab.AddComponent<EntityStateMachine>();
             entityStateMachineBody.customName = "Body";
-            entityStateMachineBody.initialStateType = new EntityStates.SerializableEntityStateType(typeof(RoR2_Roomba.RoombaSpawnState));
+            entityStateMachineBody.initialStateType = new EntityStates.SerializableEntityStateType(typeof(RoombaSpawnState));
             entityStateMachineBody.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.GenericCharacterMain));
             #endregion
 
             #region EntityStateMachine_Weapon
             var entityStateMachineWeapon = roombaPrefab.AddComponent<EntityStateMachine>();
             entityStateMachineWeapon.customName = "Weapon";
-            entityStateMachineWeapon.initialStateType = new EntityStates.SerializableEntityStateType(typeof(RoR2_Roomba.InvincibleRoombaState));
-            entityStateMachineWeapon.mainStateType = new EntityStates.SerializableEntityStateType(typeof(RoR2_Roomba.InvincibleRoombaState));
+            entityStateMachineWeapon.initialStateType = new EntityStates.SerializableEntityStateType(typeof(InvincibleRoombaState));
+            entityStateMachineWeapon.mainStateType = new EntityStates.SerializableEntityStateType(typeof(InvincibleRoombaState));
             #endregion
 
             #region SkillLocator
@@ -162,9 +163,22 @@ namespace RoR2_Roomba
 
             #region SfxLocator
             var sfxLocator = roombaPrefab.AddComponent<SfxLocator>();
-            // TODO: populate these
-            //sfxLocator.aliveLoopStart = ;
-            //sfxLocator.aliveLoopStop = ;
+            if (maxwell)
+            {
+                sfxLocator.aliveLoopStart = "Roomba_Maxwell_Play";
+                sfxLocator.aliveLoopStop = "Roomba_Maxwell_Stop";
+            }
+            else if (tv)
+            {
+                sfxLocator.aliveLoopStart = "Roomba_TV_Play";
+                sfxLocator.aliveLoopStop = "Roomba_TV_Stop";
+            }
+            else
+            {
+                // TODO: populate these
+                sfxLocator.aliveLoopStart = "Roomba_Roomba_Play";
+                sfxLocator.aliveLoopStop = "Roomba_Roomba_Stop";
+            }
             #endregion
 
             #region KinematicCharacterMotor
@@ -172,6 +186,10 @@ namespace RoR2_Roomba
             kinematicCharacterMotor.CharacterController = characterMotor;
             kinematicCharacterMotor.Capsule = roombaPrefab.GetComponent<CapsuleCollider>();
             kinematicCharacterMotor.Rigidbody = roombaPrefab.GetComponent<Rigidbody>();
+
+            kinematicCharacterMotor.CapsuleRadius = 1f;
+            kinematicCharacterMotor.CapsuleHeight = 1f;
+            kinematicCharacterMotor.CapsuleYOffset = 0f;
 
             kinematicCharacterMotor.MaxStepHeight = 0.4f;
             kinematicCharacterMotor.MinRequiredStepDepth = 0.1f;
@@ -183,9 +201,19 @@ namespace RoR2_Roomba
             kinematicCharacterMotor.PreserveAttachedRigidbodyMomentum = true;
 
             kinematicCharacterMotor.StepHandling = StepHandlingMethod.Standard;
-            kinematicCharacterMotor.LedgeHandling = true;
+            kinematicCharacterMotor.LedgeHandling = false;
             kinematicCharacterMotor.InteractiveRigidbodyHandling = true;
             kinematicCharacterMotor.SafeMovement = false;
+            #endregion
+
+            #region DropItemOnDeath
+            if (RoombaConfigs.RoombaCanDropItems.Value)
+            {
+                var dropItemOnDeath = roombaPrefab.AddComponent<DropItemOnDeath>();
+                dropItemOnDeath.body = characterBody;
+                dropItemOnDeath.dropRandomChest1Item = true;
+                dropItemOnDeath.dropAngle = 0f;
+            }
             #endregion
 
             #endregion
@@ -238,6 +266,26 @@ namespace RoR2_Roomba
 
             #endregion
 
+            #region Maxwell
+            if(maxwell && RoombaConfigs.CustomItems.Value)
+            {
+                var itemDropMaxwell = roombaPrefab.AddComponent<DropItemOnDeath>();
+                itemDropMaxwell.body = characterBody;
+                itemDropMaxwell.itemToDrop = RoR2Content.Items.Syringe;
+                itemDropMaxwell.dropAngle = 270f;
+            }
+            #endregion
+
+            #region TV
+            if(tv && RoombaConfigs.CustomItems.Value)
+            {
+                var itemDropTV = roombaPrefab.AddComponent<DropItemOnDeath>();
+                itemDropTV.body = characterBody;
+                itemDropTV.itemToDrop = RoR2Content.Items.Mushroom;
+                itemDropTV.dropAngle = 180f;
+            }
+            #endregion
+
             return roombaPrefab;
         }
 
@@ -264,8 +312,8 @@ namespace RoR2_Roomba
             #region EntityStateMachine_AI
             var entityStateMachineAI = roombaMaster.AddComponent<EntityStateMachine>();
             entityStateMachineAI.customName = "AI";
-            entityStateMachineAI.initialStateType = new EntityStates.SerializableEntityStateType(typeof(RoR2_Roomba.WanderFar));
-            entityStateMachineAI.mainStateType = new EntityStates.SerializableEntityStateType(typeof(RoR2_Roomba.WanderFar));
+            entityStateMachineAI.initialStateType = new EntityStates.SerializableEntityStateType(typeof(WanderFar));
+            entityStateMachineAI.mainStateType = new EntityStates.SerializableEntityStateType(typeof(WanderFar));
             #endregion
 
             #region BaseAI
@@ -275,7 +323,7 @@ namespace RoR2_Roomba
             baseAI.enemyAttentionDuration = 0f;
             baseAI.desiredSpawnNodeGraphType = RoR2.Navigation.MapNodeGroup.GraphType.Ground;
             baseAI.stateMachine = entityStateMachineAI;
-            baseAI.scanState = new EntityStates.SerializableEntityStateType(typeof(RoR2_Roomba.WanderFar));
+            baseAI.scanState = new EntityStates.SerializableEntityStateType(typeof(WanderFar));
             baseAI.isHealer = false;
             baseAI.enemyAttention = 0f;
             baseAI.aimVectorDampTime = 0.05f;
@@ -299,8 +347,6 @@ namespace RoR2_Roomba
             cscRoombaNew.eliteRules = SpawnCard.EliteRules.Default;
             cscRoombaNew.noElites = true;
             cscRoombaNew.forbiddenAsBoss = true;
-
-            cscRoomba = cscRoombaNew;
 
             return cscRoombaNew;
         }
