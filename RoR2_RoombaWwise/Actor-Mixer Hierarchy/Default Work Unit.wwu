@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}" SchemaVersion="97">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}" PersistMode="Standalone">
+			<ChildrenList>
+				<ActorMixer Name="Master Mixer" ID="{0AAE6422-6060-458A-8608-35CDC899C615}" ShortID="749340078">
+					<ReferenceList>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="New Attenuation" ID="{E3E80289-203B-4130-87DE-798CCFCE5455}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
+						</Reference>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<ActorMixer Name="Sfx Mixer" ID="{51D1ACB0-ED19-473E-A3A9-7F4B3456A5F0}" ShortID="172810258">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<RTPCList>
+										<RTPC Name="" ID="{42B485B2-894B-4A66-9E20-508099812388}" ShortID="147591785">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Volume_SFX" ID="{884FA062-F6E5-41EE-B8C3-FCE895E4C13B}" WorkUnitID="{14485038-7C42-4A2E-8B0B-6C851CE27274}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{CE526DD7-E9E6-4331-B2C0-6D6D5EEF1A9A}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="3"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>-200</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Roomba" ID="{1B32A0BF-6FB3-4C8F-9AB4-E1ACD2F5D7BA}" ShortID="1002409187">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-7</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Music" ID="{B61ED9CD-98BD-44AB-8AB8-76E5237CC027}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="71936__cmusounddesign__ns_roomba" ID="{C99B6F13-7BAB-47A9-8C73-6DA5757CB91A}">
+											<Language>SFX</Language>
+											<AudioFile>71936__cmusounddesign__ns_roomba.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="292770963"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="71936__cmusounddesign__ns_roomba" ID="{C99B6F13-7BAB-47A9-8C73-6DA5757CB91A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Maxwell" ID="{BC29E148-6DFB-4B0C-A534-B2E0B91E0593}" ShortID="792961953">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Music" ID="{B61ED9CD-98BD-44AB-8AB8-76E5237CC027}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Voices Of The Void Creatura Music (Maxwell's theme) [WmnUPJxfkow]" ID="{89AB7711-20CC-401B-B1A5-29B917D2075A}">
+											<Language>SFX</Language>
+											<AudioFile>Voices Of The Void Creatura Music (Maxwell's theme) [WmnUPJxfkow].wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="588388750"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Voices Of The Void Creatura Music (Maxwell's theme) [WmnUPJxfkow]" ID="{89AB7711-20CC-401B-B1A5-29B917D2075A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AntiAlienAlarm" ID="{289ED3D0-EC08-4066-AB0D-8CF9D4AF1DAE}" ShortID="538779391">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Music" ID="{B61ED9CD-98BD-44AB-8AB8-76E5237CC027}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Vargskelethor Joel Anti Alien Alarm [p_khWy7GAcQ]" ID="{8F6FFDBE-E5E9-4910-802D-0F8E7DB71CA2}">
+											<Language>SFX</Language>
+											<AudioFile>Vargskelethor Joel Anti Alien Alarm [p_khWy7GAcQ].wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="119196236"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Vargskelethor Joel Anti Alien Alarm [p_khWy7GAcQ]" ID="{8F6FFDBE-E5E9-4910-802D-0F8E7DB71CA2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+					</ChildrenList>
+				</ActorMixer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

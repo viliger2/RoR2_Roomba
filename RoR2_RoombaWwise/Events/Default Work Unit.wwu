@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{DFF8C1B5-B5A1-447A-9BD7-62B30C096184}" SchemaVersion="97">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{DFF8C1B5-B5A1-447A-9BD7-62B30C096184}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Roomba_Roomba_Play" ID="{29D67978-949C-4492-8824-C333A813F036}">
+					<ChildrenList>
+						<Action Name="" ID="{A6A2689C-A261-4503-A50C-A32ABD0887A0}" ShortID="367510917">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Roomba" ID="{1B32A0BF-6FB3-4C8F-9AB4-E1ACD2F5D7BA}" WorkUnitID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Roomba_Roomba_Stop" ID="{B7FD1F4C-EAA0-403A-8344-B8681B78E826}">
+					<ChildrenList>
+						<Action Name="" ID="{9B17D8FA-2BFE-4071-8794-007B775B6225}" ShortID="572245639">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Roomba" ID="{1B32A0BF-6FB3-4C8F-9AB4-E1ACD2F5D7BA}" WorkUnitID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Roomba_Maxwell_Play" ID="{5AEB6ED6-B325-4505-AF27-2AB3CEE5F4C4}">
+					<ChildrenList>
+						<Action Name="" ID="{9C8B19BD-A915-467E-A6E7-744EE1519688}" ShortID="479394515">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Maxwell" ID="{BC29E148-6DFB-4B0C-A534-B2E0B91E0593}" WorkUnitID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Roomba_Maxwell_Stop" ID="{03352DC0-B4EF-4B4F-8421-96BBBAD7120F}">
+					<ChildrenList>
+						<Action Name="" ID="{91C02FC4-52FC-47C3-B515-C4226301E40B}" ShortID="81889472">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Maxwell" ID="{BC29E148-6DFB-4B0C-A534-B2E0B91E0593}" WorkUnitID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Roomba_TV_Play" ID="{267AE698-E429-4A98-92B7-5D1C1C706296}">
+					<ChildrenList>
+						<Action Name="" ID="{990E24CE-05DE-4853-B400-83E1345A957A}" ShortID="928871266">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AntiAlienAlarm" ID="{289ED3D0-EC08-4066-AB0D-8CF9D4AF1DAE}" WorkUnitID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Roomba_TV_Stop" ID="{B9994925-5EA8-4DF0-8167-CCA449228CC3}">
+					<ChildrenList>
+						<Action Name="" ID="{69A103D1-D2DB-45D5-96FD-83C617816E2C}" ShortID="996644332">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AntiAlienAlarm" ID="{289ED3D0-EC08-4066-AB0D-8CF9D4AF1DAE}" WorkUnitID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

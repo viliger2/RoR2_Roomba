@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{09514583-BDCC-4EA1-8929-CF33C3BDD018}" SchemaVersion="97">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{09514583-BDCC-4EA1-8929-CF33C3BDD018}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="RoombaSoundBank" ID="{0C64D0E2-37F6-44EB-8DB7-46A282FF1F8A}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Master Mixer" ID="{0AAE6422-6060-458A-8608-35CDC899C615}" WorkUnitID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>
