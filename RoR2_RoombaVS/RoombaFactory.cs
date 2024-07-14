@@ -20,7 +20,7 @@ namespace RoR2_Roomba
         public static CharacterSpawnCard cscRoombaMaxwell { internal set; get; }
         public static CharacterSpawnCard cscRoombaTV { internal set; get; }
 
-        public GameObject CreateRoombaBody(GameObject roombaPrefab)
+        public GameObject CreateRoombaBody(GameObject roombaPrefab, GameObject bombEffect)
         {
             Transform modelBase = roombaPrefab.transform.Find("ModelBase");
             Transform aimOrigin = roombaPrefab.transform.Find("ModelBase/AimOrigin");
@@ -30,8 +30,8 @@ namespace RoR2_Roomba
             Transform cameraPositionTransform = roombaPrefab.transform.Find("ModelBase/mdlRoomba/LogBookTarget/LogBookCamera");
             Transform maxwell = roombaPrefab.transform.Find("ModelBase/mdlRoomba/maxwell");
             Transform tv = roombaPrefab.transform.Find("ModelBase/mdlRoomba/TVPrefab");
-            if(!tv) { Log.Error("oioioioi tv"); };
-            if (!maxwell) { Log.Error("oioioioi maxwell"); };
+            Transform bombTransform = roombaPrefab.transform.Find("ModelBase/mdlRoomba/SmokeBomb");
+            if(!bombTransform) { Log.Error("oioioioi bomb"); };
 
             Renderer renderer = roombaPrefab.transform.Find("ModelBase/mdlRoomba/roomba").gameObject.GetComponent<MeshRenderer>();
 
@@ -210,12 +210,21 @@ namespace RoR2_Roomba
             if (RoombaConfigs.RoombaCanDropItems.Value)
             {
                 var dropItemOnDeath = roombaPrefab.AddComponent<DropItemOnDeath>();
-                dropItemOnDeath.body = characterBody;
+                //dropItemOnDeath.body = characterBody;
                 dropItemOnDeath.dropRandomChest1Item = true;
                 dropItemOnDeath.dropAngle = 0f;
             }
             #endregion
 
+            #region RoombaInteractableManager
+            var interactableManager = roombaPrefab.AddComponent<RoombaInteractableManager>();
+            interactableManager.body = characterBody;
+            interactableManager.smokeBombPrefab = bombEffect;
+            #endregion
+
+            #region EntityLocator
+            roombaPrefab.AddComponent<EntityLocator>().entity = roombaPrefab;
+            #endregion
             #endregion
 
             #region mdlRoomba
@@ -261,7 +270,8 @@ namespace RoR2_Roomba
             #endregion
 
             #region ChildLocator
-            modelGameObject.AddComponent<ChildLocator>();
+            var childLocator = modelGameObject.AddComponent<ChildLocator>();
+            childLocator.transformPairs = new ChildLocator.NameTransformPair[] {new ChildLocator.NameTransformPair { name = "SmokeBomb", transform = bombTransform} };
             #endregion
 
             #endregion
@@ -270,8 +280,8 @@ namespace RoR2_Roomba
             if(maxwell && RoombaConfigs.CustomItems.Value)
             {
                 var itemDropMaxwell = roombaPrefab.AddComponent<DropItemOnDeath>();
-                itemDropMaxwell.body = characterBody;
-                itemDropMaxwell.itemToDrop = RoR2Content.Items.Syringe;
+                //itemDropMaxwell.body = characterBody;
+                itemDropMaxwell.itemToDrop = ContentProvider.Items.Maxwell;
                 itemDropMaxwell.dropAngle = 270f;
             }
             #endregion
@@ -280,8 +290,8 @@ namespace RoR2_Roomba
             if(tv && RoombaConfigs.CustomItems.Value)
             {
                 var itemDropTV = roombaPrefab.AddComponent<DropItemOnDeath>();
-                itemDropTV.body = characterBody;
-                itemDropTV.itemToDrop = RoR2Content.Items.Mushroom;
+                //itemDropTV.body = characterBody;
+                itemDropTV.itemToDrop = ContentProvider.Items.Poster;
                 itemDropTV.dropAngle = 180f;
             }
             #endregion

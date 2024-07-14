@@ -9,18 +9,19 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RoR2.Projectile;
 using static RoR2_Roomba.RoombaConfigs;
+using R2API;
+using RoR2_Roomba.Items;
 
 namespace RoR2_Roomba
 {
     [BepInPlugin(GUID, ModName, Version)]
+    [BepInDependency(R2API.RecalculateStatsAPI.PluginGUID)]
     public class RoombaPlugin : BaseUnityPlugin
     {
         public const string Author = "Viliger";
         public const string ModName = "Roomba";
         public const string Version = "1.0.0";
         public const string GUID = "com." + Author + "." + ModName;
-
-
 
         private void Awake()
         {
@@ -30,9 +31,9 @@ namespace RoR2_Roomba
 
             // fixing hopoo's shit
             var neutralTeam = RoR2.TeamCatalog.GetTeamDef(TeamIndex.Neutral);
-            if(neutralTeam != null)
+            if (neutralTeam != null)
             {
-                if(!neutralTeam.levelUpEffect)
+                if (!neutralTeam.levelUpEffect)
                 {
                     neutralTeam.levelUpEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/LevelUpEffectEnemy");
                 }
@@ -48,9 +49,21 @@ namespace RoR2_Roomba
                 AddBypassArmorToProjectileDamage(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidMegaCrab/VoidMegaCrabDeathBombProjectile.prefab").WaitForCompletion());
             }
 
+            Hooks();
+        }
+
+        private void Hooks()
+        {
             ContentManager.collectContentPackProviders += ContentManager_collectContentPackProviders;
             RoR2.SceneDirector.onPostPopulateSceneServer += SceneDirector_onPostPopulateSceneServer;
+            if (RoombaConfigs.CustomItems.Value)
+            {
+                On.RoR2.GlobalEventManager.OnHitEnemy += Maxwell.GlobalEventManager_OnHitEnemy;
+                RecalculateStatsAPI.GetStatCoefficients += Poster.RecalculateStatsAPI_GetStatCoefficients;
+            }
         }
+
+
 
         private static void AddBypassArmorToProjectileDamage(GameObject deathBomb)
         {

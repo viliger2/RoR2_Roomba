@@ -1,4 +1,7 @@
-﻿using RoR2.ContentManagement;
+﻿using R2API;
+using RoR2;
+using RoR2.ContentManagement;
+using RoR2_Roomba.Items;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,6 +42,13 @@ namespace RoR2_Roomba
 
         public static List<Material> SwappedMaterials = new List<Material>(); //apparently you need it because reasons?
 
+        public static class Items
+        {
+            public static ItemDef Maxwell;
+            public static ItemDef Poster;
+            public static ItemDef PileOfDirt;
+        }
+
         public IEnumerator FinalizeAsync(FinalizeAsyncArgs args)
         {
             args.ReportProgress(1f);
@@ -56,13 +66,13 @@ namespace RoR2_Roomba
         {
             _contentPack.identifier = identifier;
 
-            var soundsFolderPath = Path.Combine(Path.GetDirectoryName(typeof(ContentProvider).Assembly.Location), SoundbanksFolder);
+            var soundsFolderPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(typeof(ContentProvider).Assembly.Location), SoundbanksFolder);
             LoadSoundBanks(soundsFolderPath);
 
-            var assetsFolderPath = Path.Combine(Path.GetDirectoryName(typeof(ContentProvider).Assembly.Location), AssetBundleFolder);
+            var assetsFolderPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(typeof(ContentProvider).Assembly.Location), AssetBundleFolder);
             AssetBundle assetbundle = null;
             yield return LoadAssetBundle(
-                Path.Combine(assetsFolderPath, AssetBundleName),
+                System.IO.Path.Combine(assetsFolderPath, AssetBundleName),
                 args.progressReceiver,
             (resultAssetBundle) => assetbundle = resultAssetBundle);
 
@@ -82,6 +92,7 @@ namespace RoR2_Roomba
                         {
                             material.shader = replacementShader;
                             SwappedMaterials.Add(material);
+                            Log.Info("Replaced shared for material " + material.name);
                         }
                         else
                         {
@@ -92,14 +103,64 @@ namespace RoR2_Roomba
                 //Log.Debug("swapped materials");
             }));
 
+            var glassMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matShatteredGlass.mat");
+            while (!glassMaterial.IsDone)
+            {
+                yield return null;
+            }
+
+            var bombEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/Bandit2SmokeBomb.prefab");
+            while(!bombEffect.IsDone)
+            {
+                yield return null;
+            }
+
+            var grenadeExplosion = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/OmniExplosionVFXCommandoGrenade.prefab");
+            while (!grenadeExplosion.IsDone)
+            {
+                yield return null;
+            }
             yield return LoadAllAssetsAsync(assetbundle, args.progressReceiver, (Action<GameObject[]>)((assets) =>
             {
+                if (RoombaConfigs.CustomItems.Value)
+                {
+                    #region Maxwell
+                    //var explosionCopy = PrefabAPI.InstantiateClone(grenadeExplosion.Result, "MaxwellExplosionEffect", false);
+                    var explosionCopy = UnityEngine.Object.Instantiate(grenadeExplosion.Result, grenadeExplosion.Result.transform);
+                    explosionCopy.name = "MaxwellExplosionEffect";
+                    explosionCopy.GetComponent<EffectComponent>().soundName = "Roomba_HL_Explosion_Play";
+
+                    UnityEngine.Object.DontDestroyOnLoad(explosionCopy);
+
+                    var maxwellPickUp = assets.First(pickup => pickup.name == "PickupMaxwell");
+                    Items.Maxwell = Maxwell.CreateItemDef(maxwellPickUp);
+                    var evilMaxwell = assets.First(prefab => prefab.name == "EvilMaxwellPrefab");
+                    Maxwell.EvilMaxwellPrefab = Maxwell.CreateEvilMaxwellPrefab(evilMaxwell, explosionCopy);
+                    #endregion
+
+                    #region Poster
+                    var posterPickup = assets.First(pickup => pickup.name == "PickupPoster");
+                    Items.Poster = Poster.CreateItemDef(posterPickup);
+                    #endregion
+
+                    #region PileOfDirt
+                    var pileOfDirtPickup = assets.First(pickup => pickup.name == "PickupPileOfDirt");
+                    Items.PileOfDirt = PileOfDirt.CreateItemDef(pileOfDirtPickup, glassMaterial.Result);
+                    #endregion
+
+                    Log.Info("explosionCopy " + explosionCopy);
+
+                    _contentPack.effectDefs.Add(new EffectDef[] { new EffectDef(explosionCopy) });
+                    _contentPack.itemDefs.Add(new RoR2.ItemDef[] { Items.Maxwell, Items.Poster, Items.PileOfDirt });
+                    _contentPack.networkedObjectPrefabs.Add(new GameObject[] { Maxwell.EvilMaxwellPrefab });
+                }
+
                 var roombaFactory = new RoombaFactory();
 
                 #region RoombaNothing
                 // body
                 var roombaNothingBody = assets.First(bp => bp.name == "RoombaNothingBody");
-                roombaNothingBody = roombaFactory.CreateRoombaBody(roombaNothingBody);
+                roombaNothingBody = roombaFactory.CreateRoombaBody(roombaNothingBody, bombEffect.Result);
 
                 // master
                 var roombaNothingMaster = assets.First(mp => mp.name == "RoombaNothingMaster");
@@ -111,7 +172,7 @@ namespace RoR2_Roomba
                 #region RoombaMaxwell
                 // body
                 var roombaMaxwellBody = assets.First(bp => bp.name == "RoombaMaxwellBody");
-                roombaMaxwellBody = roombaFactory.CreateRoombaBody(roombaMaxwellBody);
+                roombaMaxwellBody = roombaFactory.CreateRoombaBody(roombaMaxwellBody, bombEffect.Result);
 
                 // master
                 var roombaMaxwellMaster = assets.First(mp => mp.name == "RoombaMaxwellMaster");
@@ -123,7 +184,7 @@ namespace RoR2_Roomba
                 #region RoombaTV
                 // body
                 var roombaTVBody = assets.First(bp => bp.name == "RoombaTVBody");
-                roombaTVBody = roombaFactory.CreateRoombaBody(roombaTVBody);
+                roombaTVBody = roombaFactory.CreateRoombaBody(roombaTVBody, bombEffect.Result);
 
                 // master
                 var roombaTVMaster = assets.First(mp => mp.name == "RoombaTVMaster");
@@ -136,7 +197,21 @@ namespace RoR2_Roomba
                 _contentPack.masterPrefabs.Add(new GameObject[] { roombaNothingMaster, roombaMaxwellMaster, roombaTVMaster });
             }));
 
+            _contentPack.networkSoundEventDefs.Add(new NetworkSoundEventDef[]
+            {
+                CreateNetworkSoundDef("Roomba_BadToTheBone_Play"),
+                CreateNetworkSoundDef("Roomba_HL_Explosion_Play"),
+            });
+
             yield break;
+        }
+
+        public static NetworkSoundEventDef CreateNetworkSoundDef(string eventName)
+        {
+            NetworkSoundEventDef networkSoundEventDef = ScriptableObject.CreateInstance<NetworkSoundEventDef>();
+            networkSoundEventDef.eventName = eventName;
+
+            return networkSoundEventDef;
         }
 
         private IEnumerator LoadAssetBundle(string assetBundleFullPath, IProgress<float> progress, Action<AssetBundle> onAssetBundleLoaded)

@@ -78,6 +78,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Roomba_BadToTheBone_Play" ID="{E46DC18A-12D4-46EB-AD3C-5F9E22374E31}">
+					<ChildrenList>
+						<Action Name="" ID="{5E839799-725A-4E70-95BE-90218E8BBAA8}" ShortID="336430777">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="BadToTheBone" ID="{36511494-EAEB-4351-AC3C-31BAB775CCA7}" WorkUnitID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Roomba_HL_Explosion_Play" ID="{681B6747-79F9-45AF-A255-A2BAC0C5D350}">
+					<ChildrenList>
+						<Action Name="" ID="{4707B343-F659-4EF6-975F-64B277A32C2E}" ShortID="811596911">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HLExplosion" ID="{A0CDD10C-B4E1-469C-BE38-E889A78AAE70}" WorkUnitID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

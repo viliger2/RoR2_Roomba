@@ -6,7 +6,7 @@
 				<ActorMixer Name="Master Mixer" ID="{0AAE6422-6060-458A-8608-35CDC899C615}" ShortID="749340078">
 					<ReferenceList>
 						<Reference Name="Attenuation">
-							<ObjectRef Name="New Attenuation" ID="{E3E80289-203B-4130-87DE-798CCFCE5455}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
+							<ObjectRef Name="Music" ID="{B61ED9CD-98BD-44AB-8AB8-76E5237CC027}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
 						</Reference>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
@@ -56,75 +56,9 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="Roomba" ID="{1B32A0BF-6FB3-4C8F-9AB4-E1ACD2F5D7BA}" ShortID="1002409187">
+								<Sound Name="BadToTheBone" ID="{36511494-EAEB-4351-AC3C-31BAB775CCA7}" ShortID="582325976">
 									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-7</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="Music" ID="{B61ED9CD-98BD-44AB-8AB8-76E5237CC027}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="71936__cmusounddesign__ns_roomba" ID="{C99B6F13-7BAB-47A9-8C73-6DA5757CB91A}">
-											<Language>SFX</Language>
-											<AudioFile>71936__cmusounddesign__ns_roomba.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="292770963"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="71936__cmusounddesign__ns_roomba" ID="{C99B6F13-7BAB-47A9-8C73-6DA5757CB91A}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="Maxwell" ID="{BC29E148-6DFB-4B0C-A534-B2E0B91E0593}" ShortID="792961953">
-									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-12</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="Music" ID="{B61ED9CD-98BD-44AB-8AB8-76E5237CC027}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="Voices Of The Void Creatura Music (Maxwell's theme) [WmnUPJxfkow]" ID="{89AB7711-20CC-401B-B1A5-29B917D2075A}">
-											<Language>SFX</Language>
-											<AudioFile>Voices Of The Void Creatura Music (Maxwell's theme) [WmnUPJxfkow].wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="588388750"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="Voices Of The Void Creatura Music (Maxwell's theme) [WmnUPJxfkow]" ID="{89AB7711-20CC-401B-B1A5-29B917D2075A}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="AntiAlienAlarm" ID="{289ED3D0-EC08-4066-AB0D-8CF9D4AF1DAE}" ShortID="538779391">
-									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
 												<Value>-5</Value>
@@ -143,18 +77,210 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="Vargskelethor Joel Anti Alien Alarm [p_khWy7GAcQ]" ID="{8F6FFDBE-E5E9-4910-802D-0F8E7DB71CA2}">
+										<AudioFileSource Name="bad_to_the_bone" ID="{3121D200-67F2-4B53-A41B-7F385F14F724}">
 											<Language>SFX</Language>
-											<AudioFile>Vargskelethor Joel Anti Alien Alarm [p_khWy7GAcQ].wav</AudioFile>
+											<AudioFile>bad_to_the_bone.wav</AudioFile>
 											<MediaIDList>
-												<MediaID ID="119196236"/>
+												<MediaID ID="753998001"/>
 											</MediaIDList>
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="Vargskelethor Joel Anti Alien Alarm [p_khWy7GAcQ]" ID="{8F6FFDBE-E5E9-4910-802D-0F8E7DB71CA2}" Platform="Linked"/>
+										<ActiveSource Name="bad_to_the_bone" ID="{3121D200-67F2-4B53-A41B-7F385F14F724}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<RandomSequenceContainer Name="HLExplosion" ID="{A0CDD10C-B4E1-469C-BE38-E889A78AAE70}" ShortID="867241814">
+									<PropertyList>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-14</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="New Attenuation" ID="{E3E80289-203B-4130-87DE-798CCFCE5455}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Explosion1" ID="{E7A27A19-B83B-4C0E-B98D-63A726E51354}" ShortID="556875817">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="hl2_explosion_1" ID="{6A75BD00-660A-4280-95DA-67411C605BFB}">
+													<Language>SFX</Language>
+													<AudioFile>hl2_explosion_1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="637967495"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="hl2_explosion_1" ID="{6A75BD00-660A-4280-95DA-67411C605BFB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Explosion2" ID="{32C8C3DC-3E50-4D81-AEA2-C1BBCA365B2B}" ShortID="51843965">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="hl2_explosion_2" ID="{1447C54B-C2AB-45F1-BA03-62D4C1FD7A73}">
+													<Language>SFX</Language>
+													<AudioFile>hl2_explosion_2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="246343786"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="hl2_explosion_2" ID="{1447C54B-C2AB-45F1-BA03-62D4C1FD7A73}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Explosion3" ID="{6BC0F2EC-CF1E-47D6-B15E-B0AA6D1F5CB0}" ShortID="35657318">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="hl2_explosion_3" ID="{FD724C2F-6165-4E11-A793-FF2713ACF1E3}">
+													<Language>SFX</Language>
+													<AudioFile>hl2_explosion_3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="535303499"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="hl2_explosion_3" ID="{FD724C2F-6165-4E11-A793-FF2713ACF1E3}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<Folder Name="RoombaSounds" ID="{696F7C6B-F998-4391-9217-DAF365BBF11A}" ShortID="119349436">
+									<ChildrenList>
+										<Sound Name="Maxwell" ID="{BC29E148-6DFB-4B0C-A534-B2E0B91E0593}" ShortID="792961953">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-12</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="New Attenuation" ID="{E3E80289-203B-4130-87DE-798CCFCE5455}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Voices Of The Void Creatura Music (Maxwell's theme) [WmnUPJxfkow]" ID="{89AB7711-20CC-401B-B1A5-29B917D2075A}">
+													<Language>SFX</Language>
+													<AudioFile>Voices Of The Void Creatura Music (Maxwell's theme) [WmnUPJxfkow].wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="588388750"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Voices Of The Void Creatura Music (Maxwell's theme) [WmnUPJxfkow]" ID="{89AB7711-20CC-401B-B1A5-29B917D2075A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Roomba" ID="{1B32A0BF-6FB3-4C8F-9AB4-E1ACD2F5D7BA}" ShortID="1002409187">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-7</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="New Attenuation" ID="{E3E80289-203B-4130-87DE-798CCFCE5455}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="71936__cmusounddesign__ns_roomba" ID="{C99B6F13-7BAB-47A9-8C73-6DA5757CB91A}">
+													<Language>SFX</Language>
+													<AudioFile>71936__cmusounddesign__ns_roomba.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="292770963"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="71936__cmusounddesign__ns_roomba" ID="{C99B6F13-7BAB-47A9-8C73-6DA5757CB91A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="AntiAlienAlarm" ID="{289ED3D0-EC08-4066-AB0D-8CF9D4AF1DAE}" ShortID="538779391">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="New Attenuation" ID="{E3E80289-203B-4130-87DE-798CCFCE5455}" WorkUnitID="{3C8BA63F-12A2-470A-83AC-F298513D1135}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Vargskelethor Joel Anti Alien Alarm [p_khWy7GAcQ]" ID="{8F6FFDBE-E5E9-4910-802D-0F8E7DB71CA2}">
+													<Language>SFX</Language>
+													<AudioFile>Vargskelethor Joel Anti Alien Alarm [p_khWy7GAcQ].wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="119196236"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Vargskelethor Joel Anti Alien Alarm [p_khWy7GAcQ]" ID="{8F6FFDBE-E5E9-4910-802D-0F8E7DB71CA2}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</ActorMixer>
 					</ChildrenList>

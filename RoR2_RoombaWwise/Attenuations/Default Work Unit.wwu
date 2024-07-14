@@ -5,7 +5,7 @@
 			<ChildrenList>
 				<Attenuation Name="New Attenuation" ID="{E3E80289-203B-4130-87DE-798CCFCE5455}" ShortID="972269145">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="50"/>
+						<Property Name="RadiusMax" Type="Real64" Value="80"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -21,7 +21,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>50</XPos>
+											<XPos>80</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -51,7 +51,7 @@
 				</Attenuation>
 				<Attenuation Name="Music" ID="{B61ED9CD-98BD-44AB-8AB8-76E5237CC027}" ShortID="107567295">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="130"/>
+						<Property Name="RadiusMax" Type="Real64" Value="50"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -67,7 +67,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>130</XPos>
+											<XPos>50</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
