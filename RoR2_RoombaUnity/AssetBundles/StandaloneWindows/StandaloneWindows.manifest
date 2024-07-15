@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 3780862141
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: roomba
+      Dependencies: {}
