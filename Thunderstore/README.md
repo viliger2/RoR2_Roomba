@@ -1,6 +1,8 @@
 # Roomba
 Just a roomba. Yep. Totally nothing else is going on here.
 
+![Image](https://raw.githubusercontent.com/viliger2/RoR2_Roomba/master/Thunderstore/preview.gif)
+
 ## Credits
 <details>
 

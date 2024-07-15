@@ -17,7 +17,7 @@
 
 		"ROOMBA_INTERACTABLE_ROOMBA_CONTEXT": "Сломать Румбу?",
 
-		"ROOMBA_ITEM_MAXWELL_DESCRIPTION" : "<style=cIsDamage>{0}</style> шанс при атаке вызвать <style=cDeath>Злого Максивелла</style>. После того как Злой Максвелл исполнит <style=cIsDamage>крутой гитарный рифф</style>, он <style=cIsDamage>взорвется</style> нанеся <style=cIsDamage>{1}</style> <style=cStack>(+{2} за штуку)</style> общего урона в <style=cIsDamage>{3}м</style> вокруг.",
+		"ROOMBA_ITEM_MAXWELL_DESCRIPTION" : "<style=cIsDamage>{0}</style> шанс при атаке вызвать <style=cDeath>Злого Максвелла</style>. После того как Злой Максвелл исполнит <style=cIsDamage>крутой гитарный рифф</style>, он <style=cIsDamage>взорвется</style> нанеся <style=cIsDamage>{1}</style> <style=cStack>(+{2} за штуку)</style> общего урона в <style=cIsDamage>{3}м</style> вокруг.",
 		"ROOMBA_ITEM_POSTER_DESCRIPTION": "Увеличивает весь <style=cIsDamage>наносимый урон</style> на <style=cIsDamage>{0}</style><style=cStack>(+{1} за штуку)</style>. Добавляет <style=cIsHealing>{2}</style><style=cStack>(+{3} за штуку)</style> <style=cIsHealing>максимального здоровья как щит</style>."
 	}
 }
