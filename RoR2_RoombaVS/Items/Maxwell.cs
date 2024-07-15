@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
 using RoR2.Audio;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace RoR2_Roomba.Items
     {
         public static GameObject EvilMaxwellPrefab;
 
-        public static ItemDef CreateItemDef(GameObject maxwellPickupItem)
+        public static ItemDef CreateItemDef(GameObject maxwellPickupItem, Sprite icon)
         {
             Transform focusPoint = maxwellPickupItem.transform.Find("FocusPoint");
             Transform cameraPosition = maxwellPickupItem.transform.Find("CameraPosition");
@@ -36,7 +37,7 @@ namespace RoR2_Roomba.Items
             itemDef.loreToken = "ROOMBA_ITEM_MAXWELL_LORE";
             itemDef.pickupModelPrefab = maxwellPickupItem;
             itemDef.canRemove = true;
-            //itemDef.pickupIconSprite = ;
+            itemDef.pickupIconSprite = icon;
             itemDef.tags = new ItemTag[] { ItemTag.WorldUnique };
 
             return itemDef;
@@ -57,6 +58,8 @@ namespace RoR2_Roomba.Items
             delayBlast.explosionEffect = grenadeExplosion;
             delayBlast.timerStagger = 0f;
             #endregion
+
+            PrefabAPI.RegisterNetworkPrefab(evilMaxwellPrefab);
 
             return evilMaxwellPrefab;
         }
@@ -104,7 +107,7 @@ namespace RoR2_Roomba.Items
                     delayBlast.crit = Util.CheckRoll(attackerBody.crit, attackerBody.master);
                     delayBlast.maxTimer = 3f;
                     delayBlast.damageColorIndex = DamageColorIndex.Item;
-                    delayBlast.falloffModel = BlastAttack.FalloffModel.Linear;
+                    delayBlast.falloffModel = BlastAttack.FalloffModel.None;
                     Log.Info("explosion effect :" + delayBlast.explosionEffect);
                 }
                 TeamFilter teamFilter = evilMaxwellCopy.GetComponent<TeamFilter>();
@@ -117,6 +120,11 @@ namespace RoR2_Roomba.Items
                 NetworkServer.Spawn(evilMaxwellCopy);
                 EntitySoundManager.EmitSoundServer((AkEventIdArg)"Roomba_BadToTheBone_Play", evilMaxwellCopy);
             }
+        }
+
+        public static void RebuildString()
+        {
+
         }
     }
 }

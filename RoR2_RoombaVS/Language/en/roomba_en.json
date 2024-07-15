@@ -1,0 +1,23 @@
+{
+	"strings": {
+		"ROOMBA_ITEM_MAXWELL_NAME" : "Maxwell",
+		"ROOMBA_ITEM_MAXWELL_PICKUP" : "Meow",
+		"ROOMBA_ITEM_MAXWELL_LORE" : "This is a cat. Meow.",
+
+		"ROOMBA_BODY_PILE_OF_DIRT" : "Pile of Trash",
+		"ROOMBA_ITEM_PILE_OF_DIRT_NAME" : "Pile of Trash",
+		"ROOMBA_ITEM_PILE_OF_DIRT_PICKUP" : "Is... is that a pile of dirt, broken glass shards and cat hair? ...what?",
+		"ROOMBA_ITEM_PILE_OF_DIRT_DESCRIPTION" : "Why is this an item?",
+		"ROOMBA_ITEM_PILE_OF_DIRT_LORE": "You know, originally this had ItemTier of NoTier, this way it would hide it in logbook. But since NoTier doesn't have pickup orb and when I tried to fix it it didn't do shit, now it's a boss item. Enjoy.",
+
+		"ROOMBA_ITEM_POSTER_NAME": "Propaganda Poster",
+		"ROOMBA_ITEM_POSTER_PICKUP": "I am doing my part!",
+
+		"ROOMBA_ROOMBA_BODY_NAME" : "Roomba", 
+
+		"ROOMBA_INTERACTABLE_ROOMBA_CONTEXT": "Break the Roomba?",
+
+		"ROOMBA_ITEM_MAXWELL_DESCRIPTION" : "<style=cIsDamage>{0}</style> chance on hit to spawn <style=cDeath>Evil Maxwell</style>. After Evil Maxwell does his <style=cIsDamage>sick guitar riff</style>, he <style=cIsDamage>explodes</style> for <style=cIsDamage>{1}</style> <style=cStack>(+{2} per stack)</style> total damage in <style=cIsDamage>{3}m</style> radius.",
+		"ROOMBA_ITEM_POSTER_DESCRIPTION": "Increases <style=cIsDamage>damage dealt</style> by <style=cIsDamage>{0}</style><style=cStack>(+{1} per stack)</style>. Add <style=cIsHealing>{2}</style><style=cStack>(+{3} per stack)</style> of <style=cIsHealing>maximum health as shield</style>."
+	}
+}

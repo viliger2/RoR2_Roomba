@@ -9,7 +9,7 @@ namespace RoR2_Roomba.Items
 {
     public class Poster
     {
-        public static ItemDef CreateItemDef(GameObject posterPickup)
+        public static ItemDef CreateItemDef(GameObject posterPickup, Sprite icon)
         {
             Transform focusPoint = posterPickup.transform.Find("FocusPoint");
             Transform cameraPosition = posterPickup.transform.Find("CameraPosition");
@@ -32,7 +32,7 @@ namespace RoR2_Roomba.Items
             itemDef.loreToken = "ROOMBA_ITEM_POSTER_LORE";
             itemDef.pickupModelPrefab = posterPickup;
             itemDef.canRemove = true;
-            //itemDef.pickupIconSprite = ;
+            itemDef.pickupIconSprite = icon;
             itemDef.tags = new ItemTag[] { ItemTag.WorldUnique };
 
             return itemDef;
@@ -49,6 +49,27 @@ namespace RoR2_Roomba.Items
                     args.baseShieldAdd += sender.maxHealth * (RoombaConfigs.PosterShieldHealthPercent.Value / 100) + sender.maxHealth * (RoombaConfigs.PosterShieldHealthPercentPerStack.Value / 100) * (count - 1);
                 }
             }
+        }
+
+        public static void RebuildString()
+        {
+            RoR2.Language currentLanguage = RoR2.Language.currentLanguage;
+            string description = "";
+
+            List<KeyValuePair<string, string>> output = new List<KeyValuePair<string, string>>();
+            RoR2.Language.LoadAllTokensFromFolder(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(typeof(RoombaPlugin).Assembly.Location), Language.LanguageFolder, RoR2.Language.currentLanguageName), output);
+            foreach (KeyValuePair<string, string> item in output)
+            {
+                if(item.Key.Equals("ROOMBA_ITEM_POSTER_DESCRIPTION"))
+                {
+                    description = item.Value;
+                    break;
+                }
+            }
+
+            description = string.Format(description, RoombaConfigs.PosterDamageAdd.Value.ToString("###%"), RoombaConfigs.PosterDamageAddPerStack.Value.ToString("###%"), RoombaConfigs.PosterShieldHealthPercent.Value.ToString("###%"), RoombaConfigs.PosterShieldHealthPercentPerStack.Value.ToString("###%"));
+
+            currentLanguage.SetStringByToken("ROOMBA_ITEM_POSTER_DESCRIPTION", description);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using KinematicCharacterController;
+using R2API;
 using RoR2;
 using RoR2.CharacterAI;
 using RoR2.EntityLogic;
@@ -80,7 +81,7 @@ namespace RoR2_Roomba
             characterBody.baseJumpCount = 1; // TODO: maybe 0?
 
             characterBody.sprintingSpeedMultiplier = 2;
-            characterBody.autoCalculateLevelStats = true;
+            characterBody.autoCalculateLevelStats = false;
 
             characterBody.levelMaxHealth = 60;
 
@@ -134,6 +135,7 @@ namespace RoR2_Roomba
             #region HealthComponent
             var healthComponent = roombaPrefab.AddComponent<HealthComponent>();
             healthComponent.globalDeathEventChanceCoefficient = 1f;
+            healthComponent.dontShowHealthbar = true;
             #endregion
 
             #region Interactor
@@ -296,6 +298,8 @@ namespace RoR2_Roomba
             }
             #endregion
 
+            PrefabAPI.RegisterNetworkPrefab(roombaPrefab);
+
             return roombaPrefab;
         }
 
@@ -339,6 +343,8 @@ namespace RoR2_Roomba
             baseAI.aimVectorDampTime = 0.05f;
             baseAI.aimVectorMaxSpeed = 180f;
             #endregion
+
+            roombaMaster.RegisterNetworkPrefab();
 
             return roombaMaster;
         }

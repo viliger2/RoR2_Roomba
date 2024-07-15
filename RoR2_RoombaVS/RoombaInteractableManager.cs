@@ -17,7 +17,7 @@ namespace RoR2_Roomba
 
         public string GetContextString([NotNull] Interactor activator)
         {
-            return Language.GetString("ROOMBA_INTERACTABLE_ROOMBA_CONTEXT");
+            return RoR2.Language.GetString("ROOMBA_INTERACTABLE_ROOMBA_CONTEXT");
         }
 
         public Interactability GetInteractability([NotNull] Interactor activator)
@@ -36,7 +36,6 @@ namespace RoR2_Roomba
             {
                 return;
             }
-
 
             if (body && body.healthComponent)
             {

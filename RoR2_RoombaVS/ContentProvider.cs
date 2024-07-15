@@ -2,6 +2,7 @@
 using RoR2;
 using RoR2.ContentManagement;
 using RoR2_Roomba.Items;
+using RoR2_Roomba.States;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -76,6 +77,17 @@ namespace RoR2_Roomba
                 args.progressReceiver,
             (resultAssetBundle) => assetbundle = resultAssetBundle);
 
+            Sprite maxwellIcon = null;
+            Sprite posterIcon = null;
+            Sprite trashIcon = null;
+
+            yield return LoadAllAssetsAsync(assetbundle, args.progressReceiver, (Action<Sprite[]>)((assets) =>
+            {
+                maxwellIcon = assets.First(icon => icon.name == "MaxwellIcon");
+                posterIcon = assets.First(icon => icon.name == "PosterIcon");
+                trashIcon = assets.First(icon => icon.name == "PileOfDirtIcon");
+            }));
+
             yield return LoadAllAssetsAsync(assetbundle, args.progressReceiver, (Action<Material[]>)((assets) =>
             {
                 var materials = assets;
@@ -92,7 +104,6 @@ namespace RoR2_Roomba
                         {
                             material.shader = replacementShader;
                             SwappedMaterials.Add(material);
-                            Log.Info("Replaced shared for material " + material.name);
                         }
                         else
                         {
@@ -100,7 +111,6 @@ namespace RoR2_Roomba
                         }
                     }
                 }
-                //Log.Debug("swapped materials");
             }));
 
             var glassMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matShatteredGlass.mat");
@@ -125,34 +135,37 @@ namespace RoR2_Roomba
                 if (RoombaConfigs.CustomItems.Value)
                 {
                     #region Maxwell
-                    //var explosionCopy = PrefabAPI.InstantiateClone(grenadeExplosion.Result, "MaxwellExplosionEffect", false);
-                    var explosionCopy = UnityEngine.Object.Instantiate(grenadeExplosion.Result, grenadeExplosion.Result.transform);
-                    explosionCopy.name = "MaxwellExplosionEffect";
+                    var explosionCopy = PrefabAPI.InstantiateClone(grenadeExplosion.Result, "MaxwellExplosionEffect", false);
+                    //var explosionCopy = UnityEngine.Object.Instantiate(grenadeExplosion.Result, grenadeExplosion.Result.transform);
+                    //explosionCopy.name = "MaxwellExplosionEffect";
                     explosionCopy.GetComponent<EffectComponent>().soundName = "Roomba_HL_Explosion_Play";
 
-                    UnityEngine.Object.DontDestroyOnLoad(explosionCopy);
+                    //UnityEngine.Object.DontDestroyOnLoad(explosionCopy);
 
                     var maxwellPickUp = assets.First(pickup => pickup.name == "PickupMaxwell");
-                    Items.Maxwell = Maxwell.CreateItemDef(maxwellPickUp);
+                    Items.Maxwell = Maxwell.CreateItemDef(maxwellPickUp, maxwellIcon);
                     var evilMaxwell = assets.First(prefab => prefab.name == "EvilMaxwellPrefab");
                     Maxwell.EvilMaxwellPrefab = Maxwell.CreateEvilMaxwellPrefab(evilMaxwell, explosionCopy);
                     #endregion
 
                     #region Poster
                     var posterPickup = assets.First(pickup => pickup.name == "PickupPoster");
-                    Items.Poster = Poster.CreateItemDef(posterPickup);
+                    Items.Poster = Poster.CreateItemDef(posterPickup, posterIcon);
                     #endregion
 
                     #region PileOfDirt
                     var pileOfDirtPickup = assets.First(pickup => pickup.name == "PickupPileOfDirt");
-                    Items.PileOfDirt = PileOfDirt.CreateItemDef(pileOfDirtPickup, glassMaterial.Result);
-                    #endregion
+                    Items.PileOfDirt = PileOfDirt.CreateItemDef(pileOfDirtPickup, glassMaterial.Result, trashIcon);
 
-                    Log.Info("explosionCopy " + explosionCopy);
+                    var pileOfDirtSpawn = assets.First(prefab => prefab.name == "PileOfDirtSpawn");
+                    pileOfDirtSpawn = PileOfDirt.CreatePileOfDirtSpawnPrefab(pileOfDirtSpawn, glassMaterial.Result);
+
+                    PileOfDirt.scPileOfDirt = PileOfDirt.CreatePileOfDirtSpawnCard(pileOfDirtSpawn);
+                    #endregion
 
                     _contentPack.effectDefs.Add(new EffectDef[] { new EffectDef(explosionCopy) });
                     _contentPack.itemDefs.Add(new RoR2.ItemDef[] { Items.Maxwell, Items.Poster, Items.PileOfDirt });
-                    _contentPack.networkedObjectPrefabs.Add(new GameObject[] { Maxwell.EvilMaxwellPrefab });
+                    _contentPack.networkedObjectPrefabs.Add(new GameObject[] { Maxwell.EvilMaxwellPrefab, pileOfDirtSpawn });
                 }
 
                 var roombaFactory = new RoombaFactory();
@@ -193,6 +206,7 @@ namespace RoR2_Roomba
                 RoombaFactory.cscRoombaTV = roombaFactory.CreateCharacterSpawnCard(roombaTVMaster);
                 #endregion
 
+                _contentPack.entityStateTypes.Add(new Type[] { typeof(InvincibleRoombaState), typeof(LookBusyFar), typeof(PileOfDirtDeath), typeof(RoombaSpawnState), typeof(WanderFar) });
                 _contentPack.bodyPrefabs.Add(new GameObject[] { roombaNothingBody, roombaMaxwellBody, roombaTVBody });
                 _contentPack.masterPrefabs.Add(new GameObject[] { roombaNothingMaster, roombaMaxwellMaster, roombaTVMaster });
             }));

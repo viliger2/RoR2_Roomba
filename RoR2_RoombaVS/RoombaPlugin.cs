@@ -11,11 +11,13 @@ using RoR2.Projectile;
 using static RoR2_Roomba.RoombaConfigs;
 using R2API;
 using RoR2_Roomba.Items;
+using System.Collections.Generic;
 
 namespace RoR2_Roomba
 {
     [BepInPlugin(GUID, ModName, Version)]
     [BepInDependency(R2API.RecalculateStatsAPI.PluginGUID)]
+    [BepInDependency(R2API.PrefabAPI.PluginGUID)]
     public class RoombaPlugin : BaseUnityPlugin
     {
         public const string Author = "Viliger";
@@ -25,6 +27,10 @@ namespace RoR2_Roomba
 
         private void Awake()
         {
+
+#if DEBUG == true
+            On.RoR2.Networking.NetworkManagerSystemSteam.OnClientConnect += (s, u, t) => { };
+#endif
             Log.Init(Logger);
 
             RoombaConfigs.PopulateConfigs(Config);
@@ -56,14 +62,14 @@ namespace RoR2_Roomba
         {
             ContentManager.collectContentPackProviders += ContentManager_collectContentPackProviders;
             RoR2.SceneDirector.onPostPopulateSceneServer += SceneDirector_onPostPopulateSceneServer;
+            RoR2.Language.collectLanguageRootFolders += CollectLanguageRootFolders;
+            RoR2.Language.onCurrentLanguageChanged += Language.Language_onCurrentLanguageChanged;
             if (RoombaConfigs.CustomItems.Value)
             {
                 On.RoR2.GlobalEventManager.OnHitEnemy += Maxwell.GlobalEventManager_OnHitEnemy;
                 RecalculateStatsAPI.GetStatCoefficients += Poster.RecalculateStatsAPI_GetStatCoefficients;
             }
         }
-
-
 
         private static void AddBypassArmorToProjectileDamage(GameObject deathBomb)
         {
@@ -80,6 +86,31 @@ namespace RoR2_Roomba
                 return;
             }
 
+            TrySpawnRoomba(sceneDirector);
+            TrySpawnPileOfDirt(sceneDirector);
+        }
+
+        private static void TrySpawnPileOfDirt(SceneDirector sceneDirector)
+        {
+            float value = sceneDirector.rng.RangeFloat(0f, 100f);
+            if (value < RoombaSpawnChance.Value)
+            {
+                var spawnRequest = new DirectorSpawnRequest(
+                    Items.PileOfDirt.scPileOfDirt,
+                    new DirectorPlacementRule
+                    {
+                        placementMode = DirectorPlacementRule.PlacementMode.Random
+                    },
+                    sceneDirector.rng);
+                spawnRequest.teamIndexOverride = TeamIndex.Neutral;
+                spawnRequest.ignoreTeamMemberLimit = true;
+
+                RoR2.DirectorCore.instance.TrySpawnObject(spawnRequest);
+            }
+        }
+
+        private static void TrySpawnRoomba(SceneDirector sceneDirector)
+        {
             float value = sceneDirector.rng.RangeFloat(0f, 100f);
             if (value < RoombaSpawnChance.Value)
             {
@@ -91,11 +122,11 @@ namespace RoR2_Roomba
                 var spawnCard = roombaSelection.Evaluate(sceneDirector.rng.nextNormalizedFloat);
 
                 var spawnRequest = new DirectorSpawnRequest(
-                    spawnCard, 
+                    spawnCard,
                     new DirectorPlacementRule
                     {
                         placementMode = DirectorPlacementRule.PlacementMode.Random
-                    }, 
+                    },
                     sceneDirector.rng);
                 spawnRequest.teamIndexOverride = TeamIndex.Neutral; // TODO: swap to Monster if blablabla
                 spawnRequest.ignoreTeamMemberLimit = true;
@@ -107,6 +138,11 @@ namespace RoR2_Roomba
         private void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider)
         {
             addContentPackProvider(new ContentProvider());
+        }
+
+        public void CollectLanguageRootFolders(List<string> folders)
+        {
+            folders.Add(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(base.Info.Location), "Language"));
         }
     }
 }
