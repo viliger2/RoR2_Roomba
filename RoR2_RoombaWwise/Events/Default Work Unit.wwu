@@ -100,6 +100,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Roomba_Breaking_Play" ID="{5119C356-8446-4D74-A444-5EEBC4635A49}">
+					<ChildrenList>
+						<Action Name="" ID="{55FCF5D2-FE2C-4489-8C42-8627C561C273}" ShortID="511559393">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="RoombaBreaking" ID="{4D9B1ABC-911A-4DE2-B896-4C4C4B9C5990}" WorkUnitID="{F3D8CBB5-4826-48FB-8CB9-0C38CD2F686D}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
