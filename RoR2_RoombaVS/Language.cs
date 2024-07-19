@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace RoR2_Roomba
 {
@@ -19,19 +17,19 @@ namespace RoR2_Roomba
                 switch (item.Key)
                 {
                     case "ROOMBA_ITEM_POSTER_DESCRIPTION":
-                        var descriptionPoster = string.Format(item.Value, 
-                            (RoombaConfigs.PosterDamageAdd.Value / 100).ToString("###%"), 
-                            (RoombaConfigs.PosterDamageAddPerStack.Value / 100).ToString("###%"), 
-                            (RoombaConfigs.PosterShieldHealthPercent.Value / 100).ToString("###%"), 
+                        var descriptionPoster = string.Format(item.Value,
+                            (RoombaConfigs.PosterDamageAdd.Value / 100).ToString("###%"),
+                            (RoombaConfigs.PosterDamageAddPerStack.Value / 100).ToString("###%"),
+                            (RoombaConfigs.PosterShieldHealthPercent.Value / 100).ToString("###%"),
                             (RoombaConfigs.PosterShieldHealthPercentPerStack.Value / 100).ToString("###%")
                             );
                         currentLanguage.SetStringByToken("ROOMBA_ITEM_POSTER_DESCRIPTION", descriptionPoster);
                         break;
                     case "ROOMBA_ITEM_MAXWELL_DESCRIPTION":
-                        var descriptionMaxwell = string.Format(item.Value, 
-                            (RoombaConfigs.MaxwellExplosionChance.Value / 100).ToString("###%"), 
-                            (RoombaConfigs.MaxwellExplosionDamage.Value / 100).ToString("###%"), 
-                            (RoombaConfigs.MaxwellExplosionDamagePerStack.Value / 100).ToString("###%"), 
+                        var descriptionMaxwell = string.Format(item.Value,
+                            (RoombaConfigs.MaxwellExplosionChance.Value / 100).ToString("###%"),
+                            (RoombaConfigs.MaxwellExplosionDamage.Value / 100).ToString("###%"),
+                            (RoombaConfigs.MaxwellExplosionDamagePerStack.Value / 100).ToString("###%"),
                             RoombaConfigs.MaxwellExplosionRadius.Value);
                         currentLanguage.SetStringByToken("ROOMBA_ITEM_MAXWELL_DESCRIPTION", descriptionMaxwell);
                         break;

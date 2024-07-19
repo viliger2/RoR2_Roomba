@@ -1,9 +1,6 @@
 ﻿using JetBrains.Annotations;
 using RoR2;
 using RoR2.Audio;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -15,6 +12,8 @@ namespace RoR2_Roomba
 
         public GameObject smokeBombPrefab;
 
+        private CharacterBody interactor;
+
         public string GetContextString([NotNull] Interactor activator)
         {
             return RoR2.Language.GetString("ROOMBA_INTERACTABLE_ROOMBA_CONTEXT");
@@ -23,7 +22,7 @@ namespace RoR2_Roomba
         public Interactability GetInteractability([NotNull] Interactor activator)
         {
             int count = activator?.GetComponent<CharacterBody>()?.inventory?.GetItemCount(ContentProvider.Items.PileOfDirt) ?? 0;
-            if(count > 0)
+            if (count > 0)
             {
                 return Interactability.Available;
             }
@@ -32,16 +31,19 @@ namespace RoR2_Roomba
 
         public void OnInteractionBegin([NotNull] Interactor activator)
         {
-            if(!NetworkServer.active)
+            if (!NetworkServer.active)
             {
                 return;
             }
 
             if (body && body.healthComponent)
             {
-                activator?.GetComponent<CharacterBody>()?.inventory?.RemoveItem(ContentProvider.Items.PileOfDirt);
-                Invoke("SpawnSmokeEffect", 1f);
-                Invoke("DestroyRoomba", 1.5f);
+                body.AddBuff(RoR2Content.Buffs.Slow80);
+                interactor = activator?.GetComponent<CharacterBody>();
+                interactor?.inventory?.RemoveItem(ContentProvider.Items.PileOfDirt);
+                EntitySoundManager.EmitSoundServer((AkEventIdArg)"Roomba_Breaking_Play", body.gameObject);
+                Invoke("SpawnSmokeEffect", 4f);
+                Invoke("DestroyRoomba", 5f);
             }
         }
 
@@ -49,6 +51,14 @@ namespace RoR2_Roomba
         {
             EffectManager.SimpleMuzzleFlash(smokeBombPrefab, body.gameObject, "SmokeBomb", true);
             EntitySoundManager.EmitSoundServer((AkEventIdArg)"Roomba_HL_Explosion_Play", body.gameObject);
+            if (interactor)
+            {
+                Chat.SendBroadcastChat(new Chat.SubjectFormatChatMessage
+                {
+                    subjectAsCharacterBody = interactor,
+                    baseToken = "ROOMBA_INTERACTABLE_CHAT_MESSAGE_BROKEN"
+                });
+            }
         }
 
         private void DestroyRoomba()

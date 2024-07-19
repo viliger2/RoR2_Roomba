@@ -1,8 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace RoR2_Roomba.Items
@@ -49,27 +46,6 @@ namespace RoR2_Roomba.Items
                     args.baseShieldAdd += sender.maxHealth * (RoombaConfigs.PosterShieldHealthPercent.Value / 100) + sender.maxHealth * (RoombaConfigs.PosterShieldHealthPercentPerStack.Value / 100) * (count - 1);
                 }
             }
-        }
-
-        public static void RebuildString()
-        {
-            RoR2.Language currentLanguage = RoR2.Language.currentLanguage;
-            string description = "";
-
-            List<KeyValuePair<string, string>> output = new List<KeyValuePair<string, string>>();
-            RoR2.Language.LoadAllTokensFromFolder(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(typeof(RoombaPlugin).Assembly.Location), Language.LanguageFolder, RoR2.Language.currentLanguageName), output);
-            foreach (KeyValuePair<string, string> item in output)
-            {
-                if(item.Key.Equals("ROOMBA_ITEM_POSTER_DESCRIPTION"))
-                {
-                    description = item.Value;
-                    break;
-                }
-            }
-
-            description = string.Format(description, RoombaConfigs.PosterDamageAdd.Value.ToString("###%"), RoombaConfigs.PosterDamageAddPerStack.Value.ToString("###%"), RoombaConfigs.PosterShieldHealthPercent.Value.ToString("###%"), RoombaConfigs.PosterShieldHealthPercentPerStack.Value.ToString("###%"));
-
-            currentLanguage.SetStringByToken("ROOMBA_ITEM_POSTER_DESCRIPTION", description);
         }
     }
 }

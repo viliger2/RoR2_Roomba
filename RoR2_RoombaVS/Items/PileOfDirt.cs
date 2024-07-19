@@ -1,12 +1,6 @@
 ﻿using R2API;
 using RoR2;
-using RoR2_Roomba.States;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RoR2_Roomba.Items
@@ -73,7 +67,7 @@ namespace RoR2_Roomba.Items
             #region EntityStateMachine_Body
             var esmBody = pileOfDirtPrefab.AddComponent<EntityStateMachine>();
             esmBody.customName = "Body";
-            esmBody.initialStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Idle)); 
+            esmBody.initialStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Idle));
             esmBody.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Idle));
             #endregion
 

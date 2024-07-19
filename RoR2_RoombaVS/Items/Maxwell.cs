@@ -1,12 +1,8 @@
 ﻿using R2API;
 using RoR2;
 using RoR2.Audio;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using static RoR2.CharacterBody;
 
 namespace RoR2_Roomba.Items
 {
@@ -88,7 +84,6 @@ namespace RoR2_Roomba.Items
             var maxwellCount = attackerBody.master.inventory.GetItemCount(ContentProvider.Items.Maxwell);
             if (maxwellCount > 0 && Util.CheckRoll((RoombaConfigs.MaxwellExplosionChance.Value) * damageInfo.procCoefficient, attackerBody.master))
             {
-                Log.Info("we are inside check");
                 Vector3 victimCorePosition = victim.GetComponent<CharacterBody>().corePosition;
                 float damageCoefficient = RoombaConfigs.MaxwellExplosionDamage.Value / 100f + ((RoombaConfigs.MaxwellExplosionDamagePerStack.Value / 100f) * (maxwellCount - 1));
                 float baseDamage = Util.OnKillProcDamage(attackerBody.damage, damageCoefficient);
@@ -96,7 +91,6 @@ namespace RoR2_Roomba.Items
                 DelayBlast delayBlast = evilMaxwellCopy.GetComponent<DelayBlast>();
                 if ((bool)delayBlast)
                 {
-                    Log.Info("we are modifying delay blast");
                     delayBlast.position = victimCorePosition;
                     delayBlast.baseDamage = baseDamage;
                     delayBlast.baseForce = 2000f;
@@ -108,23 +102,15 @@ namespace RoR2_Roomba.Items
                     delayBlast.maxTimer = 3f;
                     delayBlast.damageColorIndex = DamageColorIndex.Item;
                     delayBlast.falloffModel = BlastAttack.FalloffModel.None;
-                    Log.Info("explosion effect :" + delayBlast.explosionEffect);
                 }
                 TeamFilter teamFilter = evilMaxwellCopy.GetComponent<TeamFilter>();
                 if ((bool)teamFilter)
                 {
-                    Log.Info("we are setting teamindex");
                     teamFilter.teamIndex = attackerBody.GetComponent<TeamComponent>().teamIndex;
                 }
-                Log.Info("we spawn object and make sound");
                 NetworkServer.Spawn(evilMaxwellCopy);
                 EntitySoundManager.EmitSoundServer((AkEventIdArg)"Roomba_BadToTheBone_Play", evilMaxwellCopy);
             }
-        }
-
-        public static void RebuildString()
-        {
-
         }
     }
 }

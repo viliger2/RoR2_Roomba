@@ -1,17 +1,13 @@
 ﻿using BepInEx;
-using BepInEx.Configuration;
-using EntityStates.GameOver;
-using RoR2;
-using System.IO;
-using RoR2.ContentManagement;
-using System;
-using UnityEngine;
-using UnityEngine.AddressableAssets;
-using RoR2.Projectile;
-using static RoR2_Roomba.RoombaConfigs;
 using R2API;
+using RoR2;
+using RoR2.ContentManagement;
+using RoR2.Projectile;
 using RoR2_Roomba.Items;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using static RoR2_Roomba.RoombaConfigs;
 
 namespace RoR2_Roomba
 {
@@ -22,12 +18,11 @@ namespace RoR2_Roomba
     {
         public const string Author = "Viliger";
         public const string ModName = "Roomba";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.1";
         public const string GUID = "com." + Author + "." + ModName;
 
         private void Awake()
         {
-
 #if DEBUG == true
             On.RoR2.Networking.NetworkManagerSystemSteam.OnClientConnect += (s, u, t) => { };
 #endif
@@ -87,7 +82,10 @@ namespace RoR2_Roomba
             }
 
             TrySpawnRoomba(sceneDirector);
-            TrySpawnPileOfDirt(sceneDirector);
+            if (RoombaConfigs.CustomItems.Value)
+            {
+                TrySpawnPileOfDirt(sceneDirector);
+            }
         }
 
         private static void TrySpawnPileOfDirt(SceneDirector sceneDirector)

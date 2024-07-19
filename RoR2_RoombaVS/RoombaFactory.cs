@@ -1,15 +1,9 @@
-﻿using EntityStates;
-using KinematicCharacterController;
+﻿using KinematicCharacterController;
 using R2API;
 using RoR2;
 using RoR2.CharacterAI;
-using RoR2.EntityLogic;
 using RoR2.Networking;
 using RoR2_Roomba.States;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -32,7 +26,6 @@ namespace RoR2_Roomba
             Transform maxwell = roombaPrefab.transform.Find("ModelBase/mdlRoomba/maxwell");
             Transform tv = roombaPrefab.transform.Find("ModelBase/mdlRoomba/TVPrefab");
             Transform bombTransform = roombaPrefab.transform.Find("ModelBase/mdlRoomba/SmokeBomb");
-            if(!bombTransform) { Log.Error("oioioioi bomb"); };
 
             Renderer renderer = roombaPrefab.transform.Find("ModelBase/mdlRoomba/roomba").gameObject.GetComponent<MeshRenderer>();
 
@@ -63,7 +56,7 @@ namespace RoR2_Roomba
 
             #region CharacterBody
             CharacterBody characterBody = null;
-            if(!roombaPrefab.TryGetComponent<CharacterBody>(out characterBody))
+            if (!roombaPrefab.TryGetComponent<CharacterBody>(out characterBody))
             {
                 characterBody = roombaPrefab.AddComponent<CharacterBody>();
             }
@@ -125,7 +118,7 @@ namespace RoR2_Roomba
 
             #region TeamComponent
             TeamComponent teamComponent = null;
-            if(!roombaPrefab.TryGetComponent<TeamComponent>(out teamComponent))
+            if (!roombaPrefab.TryGetComponent<TeamComponent>(out teamComponent))
             {
                 teamComponent = roombaPrefab.AddComponent<TeamComponent>();
             }
@@ -177,7 +170,6 @@ namespace RoR2_Roomba
             }
             else
             {
-                // TODO: populate these
                 sfxLocator.aliveLoopStart = "Roomba_Roomba_Play";
                 sfxLocator.aliveLoopStop = "Roomba_Roomba_Stop";
             }
@@ -212,7 +204,6 @@ namespace RoR2_Roomba
             if (RoombaConfigs.RoombaCanDropItems.Value)
             {
                 var dropItemOnDeath = roombaPrefab.AddComponent<DropItemOnDeath>();
-                //dropItemOnDeath.body = characterBody;
                 dropItemOnDeath.dropRandomChest1Item = true;
                 dropItemOnDeath.dropAngle = 0f;
             }
@@ -247,7 +238,6 @@ namespace RoR2_Roomba
             #region CharacterModel
             var characterModel = modelGameObject.AddComponent<CharacterModel>();
             characterModel.body = characterBody;
-            //characterModel.itemDisplayRuleSet = ; hopefully I don't need it
             characterModel.autoPopulateLightInfos = true;
             characterModel.baseRendererInfos = new CharacterModel.RendererInfo[]
             {
@@ -273,26 +263,24 @@ namespace RoR2_Roomba
 
             #region ChildLocator
             var childLocator = modelGameObject.AddComponent<ChildLocator>();
-            childLocator.transformPairs = new ChildLocator.NameTransformPair[] {new ChildLocator.NameTransformPair { name = "SmokeBomb", transform = bombTransform} };
+            childLocator.transformPairs = new ChildLocator.NameTransformPair[] { new ChildLocator.NameTransformPair { name = "SmokeBomb", transform = bombTransform } };
             #endregion
 
             #endregion
 
             #region Maxwell
-            if(maxwell && RoombaConfigs.CustomItems.Value)
+            if (maxwell && RoombaConfigs.CustomItems.Value)
             {
                 var itemDropMaxwell = roombaPrefab.AddComponent<DropItemOnDeath>();
-                //itemDropMaxwell.body = characterBody;
                 itemDropMaxwell.itemToDrop = ContentProvider.Items.Maxwell;
                 itemDropMaxwell.dropAngle = 270f;
             }
             #endregion
 
             #region TV
-            if(tv && RoombaConfigs.CustomItems.Value)
+            if (tv && RoombaConfigs.CustomItems.Value)
             {
                 var itemDropTV = roombaPrefab.AddComponent<DropItemOnDeath>();
-                //itemDropTV.body = characterBody;
                 itemDropTV.itemToDrop = ContentProvider.Items.Poster;
                 itemDropTV.dropAngle = 180f;
             }
@@ -314,7 +302,6 @@ namespace RoR2_Roomba
             characterMaster.bodyPrefab = roombaBody;
             characterMaster.spawnOnStart = false;
             characterMaster.teamIndex = TeamIndex.Neutral; // TODO: swap to monster if enemies attack it
-            //characterMaster.OnBodyDeath  TODO: maybe do something funny with it
             characterMaster.destroyOnBodyDeath = true;
             characterMaster.preventGameOver = true;
             #endregion
@@ -366,6 +353,5 @@ namespace RoR2_Roomba
 
             return cscRoombaNew;
         }
-
     }
 }

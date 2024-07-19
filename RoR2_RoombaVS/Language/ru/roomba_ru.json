@@ -1,23 +1,25 @@
 {
 	"strings": {
-		"ROOMBA_ITEM_MAXWELL_NAME" : "Максвелл",
-		"ROOMBA_ITEM_MAXWELL_PICKUP" : "Мяу",
-		"ROOMBA_ITEM_MAXWELL_LORE" : "Это кот. Мяу.",
+		"ROOMBA_ITEM_MAXWELL_NAME": "Максвелл",
+		"ROOMBA_ITEM_MAXWELL_PICKUP": "Мяу",
+		"ROOMBA_ITEM_MAXWELL_LORE": "Это кот. Мяу.",
 
-		"ROOMBA_BODY_PILE_OF_DIRT" : "Куча мусора",
-		"ROOMBA_ITEM_PILE_OF_DIRT_NAME" : "Куча мусора",
-		"ROOMBA_ITEM_PILE_OF_DIRT_PICKUP" : "Это что... кучка грязи, куски сломанного стекла и кошачья шерсть? ...что?",
-		"ROOMBA_ITEM_PILE_OF_DIRT_DESCRIPTION" : "Почему это предмет?",
+		"ROOMBA_BODY_PILE_OF_DIRT": "Куча мусора",
+		"ROOMBA_ITEM_PILE_OF_DIRT_NAME": "Куча мусора",
+		"ROOMBA_ITEM_PILE_OF_DIRT_PICKUP": "Это что... кучка грязи, куски сломанного стекла и кошачья шерсть? ...что?",
+		"ROOMBA_ITEM_PILE_OF_DIRT_DESCRIPTION": "Почему это предмет?",
 		"ROOMBA_ITEM_PILE_OF_DIRT_LORE": "Изначально этот предмет имел ItemTier значения NoTier, но потом выяснилось что у NoTier нет орбы которая вылетает перед тем как появится предмет, я попытался это поправить и не смог, поэтому теперь это босс предмет. Наслаждайтесь",
 
 		"ROOMBA_ITEM_POSTER_NAME": "Плакат с пропагандой",
 		"ROOMBA_ITEM_POSTER_PICKUP": "Я вношу свой вклад!",
 
-		"ROOMBA_ROOMBA_BODY_NAME" : "Румба", 
+		"ROOMBA_ROOMBA_BODY_NAME": "Румба",
 
-		"ROOMBA_INTERACTABLE_ROOMBA_CONTEXT": "Сломать Румбу?",
+		"ROOMBA_INTERACTABLE_ROOMBA_CONTEXT": "Эээ?",
+		"ROOMBA_INTERACTABLE_CHAT_MESSAGE_BROKEN_2P": "<style=cShrine>Похоже что вы сломали Румбу...</style>",
+		"ROOMBA_INTERACTABLE_CHAT_MESSAGE_BROKEN": "<style=cShrine>Пожоже что {0} сломал Румбу...</style>",
 
-		"ROOMBA_ITEM_MAXWELL_DESCRIPTION" : "<style=cIsDamage>{0}</style> шанс при атаке вызвать <style=cDeath>Злого Максвелла</style>. После того как Злой Максвелл исполнит <style=cIsDamage>крутой гитарный рифф</style>, он <style=cIsDamage>взорвется</style> нанеся <style=cIsDamage>{1}</style> <style=cStack>(+{2} за штуку)</style> общего урона в <style=cIsDamage>{3}м</style> вокруг.",
+		"ROOMBA_ITEM_MAXWELL_DESCRIPTION": "<style=cIsDamage>{0}</style> шанс при атаке вызвать <style=cDeath>Злого Максвелла</style>. После того как Злой Максвелл исполнит <style=cIsDamage>крутой гитарный рифф</style>, он <style=cIsDamage>взорвется</style> нанеся <style=cIsDamage>{1}</style> <style=cStack>(+{2} за штуку)</style> общего урона в <style=cIsDamage>{3}м</style> вокруг.",
 		"ROOMBA_ITEM_POSTER_DESCRIPTION": "Увеличивает весь <style=cIsDamage>наносимый урон</style> на <style=cIsDamage>{0}</style><style=cStack>(+{1} за штуку)</style>. Добавляет <style=cIsHealing>{2}</style><style=cStack>(+{3} за штуку)</style> <style=cIsHealing>максимального здоровья как щит</style>."
 	}
 }

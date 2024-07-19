@@ -1,8 +1,4 @@
-﻿using BepInEx;
-using BepInEx.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BepInEx.Configuration;
 
 namespace RoR2_Roomba
 {
@@ -46,9 +42,6 @@ namespace RoR2_Roomba
             PosterDamageAddPerStack = Config.Bind("Poster", "Poster Damage Increase Per Stack", 5f, "Damage increase of Poster, in percent per stack.");
             PosterShieldHealthPercent = Config.Bind("Poster", "Poster Shield Value", 15f, "How much of max health as shield Poster gives.");
             PosterShieldHealthPercentPerStack = Config.Bind("Poster", "Poster Shield Value Per Stack", 15f, "How much of max health as shield Poster gives per stack.");
-
-
         }
-
     }
 }

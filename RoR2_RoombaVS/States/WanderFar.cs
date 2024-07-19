@@ -1,11 +1,7 @@
-﻿using EntityStates.AI;
-using EntityStates.AI.Walker;
+﻿using EntityStates.AI.Walker;
 using RoR2;
 using RoR2.CharacterAI;
 using RoR2.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace RoR2_Roomba.States
@@ -14,7 +10,6 @@ namespace RoR2_Roomba.States
     {
         public static float refreshTime = 15f;
         private float refreshTimer;
-
 
         public override void OnEnter()
         {
@@ -107,30 +102,6 @@ namespace RoR2_Roomba.States
                 return position;
             }
             return null;
-
-
-            //NodeGraphSpider nodeGraphSpider = new NodeGraphSpider(nodeGraph, (HullMask)(1 << (int)body.hullClassification));
-            //NodeGraph.NodeIndex nodeIndex = nodeGraph.FindClosestNode(bodyTransform.position, body.hullClassification, 50f);
-            //nodeGraphSpider.AddNodeForNextStep(nodeIndex);
-            //for (int i = 0; i < 6; i++)
-            //{
-            //    nodeGraphSpider.PerformStep();
-            //}
-            //List<NodeGraphSpider.StepInfo> collectedSteps = nodeGraphSpider.collectedSteps;
-            //if (collectedSteps.Count == 0)
-            //{
-            //    return null;
-            //}
-            //int index = Random.Range(0, collectedSteps.Count);
-            //NodeGraph.NodeIndex node = collectedSteps[index].node;
-            //if (nodeGraph.GetNodePosition(node, out var position))
-            //{
-            //    return position;
-            //}
-            //return null;
-
-
-            //return new Vector3();
         }
     }
 }

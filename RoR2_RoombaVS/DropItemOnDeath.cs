@@ -1,7 +1,4 @@
 ﻿using RoR2;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
@@ -10,8 +7,6 @@ namespace RoR2_Roomba
 {
     public class DropItemOnDeath : MonoBehaviour, IOnKilledServerReceiver
     {
-        //public CharacterBody body;
-
         public ItemDef itemToDrop;
 
         public bool dropRandomChest1Item = false;

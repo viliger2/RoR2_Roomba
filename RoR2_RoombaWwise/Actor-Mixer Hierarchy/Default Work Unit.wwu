@@ -279,6 +279,35 @@
 												<ActiveSource Name="Vargskelethor Joel Anti Alien Alarm [p_khWy7GAcQ]" ID="{8F6FFDBE-E5E9-4910-802D-0F8E7DB71CA2}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
+										<Sound Name="RoombaBreaking" ID="{4D9B1ABC-911A-4DE2-B896-4C4C4B9C5990}" ShortID="602758513">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>4</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{6C3C67B5-2450-49EC-AAC2-5243DBDE1772}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DEFDC7C0-DCD0-49C5-8314-33E6C9F8E1E7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="410242__leonifs__grinding-metal" ID="{72793C0E-23B3-430B-9B56-4BC327061096}">
+													<Language>SFX</Language>
+													<AudioFile>410242__leonifs__grinding-metal.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="28385514"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="410242__leonifs__grinding-metal" ID="{72793C0E-23B3-430B-9B56-4BC327061096}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>

@@ -6,13 +6,9 @@ using RoR2_Roomba.States;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using static RoR2.Console;
 
 namespace RoR2_Roomba
 {
@@ -120,7 +116,7 @@ namespace RoR2_Roomba
             }
 
             var bombEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/Bandit2SmokeBomb.prefab");
-            while(!bombEffect.IsDone)
+            while (!bombEffect.IsDone)
             {
                 yield return null;
             }
@@ -136,11 +132,7 @@ namespace RoR2_Roomba
                 {
                     #region Maxwell
                     var explosionCopy = PrefabAPI.InstantiateClone(grenadeExplosion.Result, "MaxwellExplosionEffect", false);
-                    //var explosionCopy = UnityEngine.Object.Instantiate(grenadeExplosion.Result, grenadeExplosion.Result.transform);
-                    //explosionCopy.name = "MaxwellExplosionEffect";
                     explosionCopy.GetComponent<EffectComponent>().soundName = "Roomba_HL_Explosion_Play";
-
-                    //UnityEngine.Object.DontDestroyOnLoad(explosionCopy);
 
                     var maxwellPickUp = assets.First(pickup => pickup.name == "PickupMaxwell");
                     Items.Maxwell = Maxwell.CreateItemDef(maxwellPickUp, maxwellIcon);
@@ -215,6 +207,7 @@ namespace RoR2_Roomba
             {
                 CreateNetworkSoundDef("Roomba_BadToTheBone_Play"),
                 CreateNetworkSoundDef("Roomba_HL_Explosion_Play"),
+                CreateNetworkSoundDef("Roomba_Breaking_Play")
             });
 
             yield break;

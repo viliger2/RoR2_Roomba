@@ -1,7 +1,4 @@
 ﻿using EntityStates.AI.Walker;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace RoR2_Roomba.States

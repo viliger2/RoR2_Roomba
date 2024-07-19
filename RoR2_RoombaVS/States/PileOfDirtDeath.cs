@@ -1,10 +1,6 @@
 ﻿using EntityStates;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using static RoR2.DotController;
-using UnityEngine;
 using RoR2;
+using UnityEngine;
 
 namespace RoR2_Roomba.States
 {
