@@ -1,7 +1,7 @@
 {
     "name": "Roomba",
-    "version_number": "1.0.0",
-    "website_url": "https://github.com/viliger2/ExtradimensionaItems",
+    "version_number": "1.0.2",
+    "website_url": "https://github.com/viliger2/RoR2_Roomba",
     "description": "Is that... a roomba? Must've fallen out of UES Contact Light.",
     "dependencies": [
 	    "bbepis-BepInExPack-5.4.2113",

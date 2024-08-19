@@ -5,7 +5,9 @@ using RoR2.CharacterAI;
 using RoR2.Networking;
 using RoR2_Roomba.States;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
+using static RoR2.Skills.ComboSkillDef;
 
 namespace RoR2_Roomba
 {
@@ -85,7 +87,7 @@ namespace RoR2_Roomba
             #endregion
 
             #region CameraTargetParams
-            roombaPrefab.AddComponent<CameraTargetParams>();
+            roombaPrefab.AddComponent<CameraTargetParams>().cameraParams = Addressables.LoadAssetAsync<CharacterCameraParams>("RoR2/Base/Common/ccpStandard.asset").WaitForCompletion();
             #endregion
 
             #region ModelLocator

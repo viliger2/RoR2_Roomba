@@ -7,7 +7,7 @@ Just a roomba. Yep. Totally nothing else is going on here.
 <details>
 
   * Roomba model - https://sketchfab.com/3d-models/robot-vacuum-cleaner-low-poly-7230d8d80e8b4a82b4a34a5e7926d0d3
-  * Roomba sound - Roomba sound - https://freesound.org/people/cmusounddesign/sounds/71936/
+  * Roomba sound - https://freesound.org/people/cmusounddesign/sounds/71936/
   <details>
   <Summary>spoilerino no fake 100% real</summary>
   
@@ -17,6 +17,7 @@ Just a roomba. Yep. Totally nothing else is going on here.
 * Joel's Anti Alien Alarm - https://www.youtube.com/watch?v=p_khWy7GAcQ
 * Bad To The Bone Riff - https://www.youtube.com/watch?v=Ad87SqVYizA
 * Half Life 2 explosion sound effects - https://www.youtube.com/watch?v=-73Rotkv274
+* Metal grinding sound - https://freesound.org/people/Leoni@FS/sounds/410242/
   </details>
 
 </details>
