@@ -75,5 +75,10 @@ namespace RoR2_Roomba
         {
             return true;
         }
+
+        public bool ShouldProximityHighlight()
+        {
+            return true;
+        }
     }
 }

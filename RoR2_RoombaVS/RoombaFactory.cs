@@ -181,7 +181,18 @@ namespace RoR2_Roomba
             var kinematicCharacterMotor = roombaPrefab.AddComponent<KinematicCharacterMotor>();
             kinematicCharacterMotor.CharacterController = characterMotor;
             kinematicCharacterMotor.Capsule = roombaPrefab.GetComponent<CapsuleCollider>();
-            kinematicCharacterMotor.Rigidbody = roombaPrefab.GetComponent<Rigidbody>();
+            kinematicCharacterMotor._attachedRigidbody = roombaPrefab.GetComponent<Rigidbody>();
+
+            // new shit
+            kinematicCharacterMotor.StableGroundLayers = LayerIndex.world.mask;
+            kinematicCharacterMotor.AllowSteppingWithoutStableGrounding = false;
+            kinematicCharacterMotor.LedgeAndDenivelationHandling = true;
+            kinematicCharacterMotor.SimulatedCharacterMass = 1f;
+            kinematicCharacterMotor.CheckMovementInitialOverlaps = true;
+            kinematicCharacterMotor.KillVelocityWhenExceedMaxMovementIterations = true;
+            kinematicCharacterMotor.KillRemainingMovementWhenExceedMaxMovementIterations = true;
+            kinematicCharacterMotor.DiscreteCollisionEvents = false;
+            // end new shit
 
             kinematicCharacterMotor.CapsuleRadius = 1f;
             kinematicCharacterMotor.CapsuleHeight = 1f;
@@ -197,9 +208,7 @@ namespace RoR2_Roomba
             kinematicCharacterMotor.PreserveAttachedRigidbodyMomentum = true;
 
             kinematicCharacterMotor.StepHandling = StepHandlingMethod.Standard;
-            kinematicCharacterMotor.LedgeHandling = false;
             kinematicCharacterMotor.InteractiveRigidbodyHandling = true;
-            kinematicCharacterMotor.SafeMovement = false;
             #endregion
 
             #region DropItemOnDeath

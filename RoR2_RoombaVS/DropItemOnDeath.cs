@@ -15,6 +15,20 @@ namespace RoR2_Roomba
 
         private static PickupDropTable dropTable = Addressables.LoadAssetAsync<PickupDropTable>("RoR2/Base/Chest1/dtChest1.asset").WaitForCompletion();
 
+        private void OnEnable()
+        {
+            gameObject.layer = LayerIndex.defaultLayer.intVal;
+        }
+
+        private void FixedUpdate()
+        {
+            // I LOVE IT
+            if(gameObject.layer != LayerIndex.defaultLayer.intVal)
+            {
+                gameObject.layer = LayerIndex.defaultLayer.intVal;
+            }
+        }
+
         public void OnKilledServer(DamageReport damageReport)
         {
             if (NetworkServer.active)

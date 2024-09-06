@@ -60,6 +60,54 @@ namespace RoR2_Roomba.Items
             return evilMaxwellPrefab;
         }
 
+
+        public static void GlobalEventManager_onServerDamageDealt(DamageReport obj)
+        {
+            var damageInfo = obj.damageInfo;
+            var victim = obj.victim;
+
+            if (!damageInfo.attacker.TryGetComponent<CharacterBody>(out var attackerBody))
+            {
+                return;
+            }
+
+            if (!attackerBody.master)
+            {
+                return;
+            }
+
+            var maxwellCount = attackerBody.master.inventory.GetItemCount(ContentProvider.Items.Maxwell);
+            if (maxwellCount > 0 && Util.CheckRoll((RoombaConfigs.MaxwellExplosionChance.Value) * damageInfo.procCoefficient, attackerBody.master))
+            {
+                Vector3 victimCorePosition = victim.GetComponent<CharacterBody>().corePosition;
+                float damageCoefficient = RoombaConfigs.MaxwellExplosionDamage.Value / 100f + ((RoombaConfigs.MaxwellExplosionDamagePerStack.Value / 100f) * (maxwellCount - 1));
+                float baseDamage = Util.OnKillProcDamage(attackerBody.damage, damageCoefficient);
+                GameObject evilMaxwellCopy = UnityEngine.Object.Instantiate(EvilMaxwellPrefab, victimCorePosition, Quaternion.identity);
+                DelayBlast delayBlast = evilMaxwellCopy.GetComponent<DelayBlast>();
+                if ((bool)delayBlast)
+                {
+                    delayBlast.position = victimCorePosition;
+                    delayBlast.baseDamage = baseDamage;
+                    delayBlast.baseForce = 2000f;
+                    delayBlast.bonusForce = Vector3.up * 1000f;
+                    delayBlast.radius = RoombaConfigs.MaxwellExplosionRadius.Value;
+                    delayBlast.attacker = damageInfo.attacker;
+                    delayBlast.inflictor = null;
+                    delayBlast.crit = Util.CheckRoll(attackerBody.crit, attackerBody.master);
+                    delayBlast.maxTimer = 3f;
+                    delayBlast.damageColorIndex = DamageColorIndex.Item;
+                    delayBlast.falloffModel = BlastAttack.FalloffModel.None;
+                }
+                TeamFilter teamFilter = evilMaxwellCopy.GetComponent<TeamFilter>();
+                if ((bool)teamFilter)
+                {
+                    teamFilter.teamIndex = attackerBody.GetComponent<TeamComponent>().teamIndex;
+                }
+                NetworkServer.Spawn(evilMaxwellCopy);
+                EntitySoundManager.EmitSoundServer((AkEventIdArg)"Roomba_BadToTheBone_Play", evilMaxwellCopy);
+            }
+        }
+
         public static void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim)
         {
             orig(self, damageInfo, victim);

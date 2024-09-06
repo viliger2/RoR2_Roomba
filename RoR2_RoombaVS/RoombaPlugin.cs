@@ -61,7 +61,8 @@ namespace RoR2_Roomba
             RoR2.Language.onCurrentLanguageChanged += Language.Language_onCurrentLanguageChanged;
             if (RoombaConfigs.CustomItems.Value)
             {
-                On.RoR2.GlobalEventManager.OnHitEnemy += Maxwell.GlobalEventManager_OnHitEnemy;
+                GlobalEventManager.onServerDamageDealt += Maxwell.GlobalEventManager_onServerDamageDealt;
+                //On.RoR2.GlobalEventManager.OnHitEnemy += Maxwell.GlobalEventManager_OnHitEnemy;
                 RecalculateStatsAPI.GetStatCoefficients += Poster.RecalculateStatsAPI_GetStatCoefficients;
             }
         }

@@ -34,8 +34,8 @@ namespace RoR2_Roomba
             RoombaCanDropItems = Config.Bind("Items", "Roomba Drops Normal Chest Items", true, "Roomba will drop items. It will drop item equal to normal chest, if you want to disable custom drops, uncheck Enable Custom Items.");
 
             MaxwellExplosionChance = Config.Bind("Maxwell", "Maxwell Proc Chance", 5f, "Chance to spawn Evil Maxwell.");
-            MaxwellExplosionDamage = Config.Bind("Maxwell", "Maxwell Explosion Damage", 400f, "Damage of Evil Maxwell explosion, in percent of total damage.");
-            MaxwellExplosionDamagePerStack = Config.Bind("Maxwell", "Maxwell Explosion Damage Per Stack", 400f, "Damage of Evil Maxwell explosion per stack, in percent of total damage.");
+            MaxwellExplosionDamage = Config.Bind("Maxwell", "Maxwell Explosion Damage", 600f, "Damage of Evil Maxwell explosion, in percent of total damage.");
+            MaxwellExplosionDamagePerStack = Config.Bind("Maxwell", "Maxwell Explosion Damage Per Stack", 600f, "Damage of Evil Maxwell explosion per stack, in percent of total damage.");
             MaxwellExplosionRadius = Config.Bind("Maxwell", "Maxwell Explosion Radius", 11f, "Explosion radius of Evil Maxwell. By default value is the same as explosion of Commando's grenade.");
 
             PosterDamageAdd = Config.Bind("Poster", "Poster Damage Increase", 5f, "Damage increase of Poster, in percent.");
