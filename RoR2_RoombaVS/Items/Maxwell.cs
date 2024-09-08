@@ -66,7 +66,7 @@ namespace RoR2_Roomba.Items
             var damageInfo = obj.damageInfo;
             var victim = obj.victim;
 
-            if (!damageInfo.attacker.TryGetComponent<CharacterBody>(out var attackerBody))
+            if (!damageInfo.attacker || !damageInfo.attacker.TryGetComponent<CharacterBody>(out var attackerBody))
             {
                 return;
             }

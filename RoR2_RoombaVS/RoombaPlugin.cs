@@ -18,7 +18,7 @@ namespace RoR2_Roomba
     {
         public const string Author = "Viliger";
         public const string ModName = "Roomba";
-        public const string Version = "1.0.2";
+        public const string Version = "1.0.5";
         public const string GUID = "com." + Author + "." + ModName;
 
         private void Awake()
@@ -129,8 +129,21 @@ namespace RoR2_Roomba
                     sceneDirector.rng);
                 spawnRequest.teamIndexOverride = TeamIndex.Neutral; // TODO: swap to Monster if blablabla
                 spawnRequest.ignoreTeamMemberLimit = true;
+                spawnRequest.onSpawnedServer += OnRoombaSpawn;
 
                 RoR2.DirectorCore.instance.TrySpawnObject(spawnRequest);
+            }
+        }
+        
+        private static void OnRoombaSpawn(SpawnCard.SpawnResult result)
+        {
+            if(result.success)
+            {
+                var master = result.spawnedInstance.GetComponent<CharacterMaster>();
+                if(master && master.inventory)
+                {
+                    master.inventory.GiveItem(RoR2.RoR2Content.Items.TeleportWhenOob);
+                }
             }
         }
 
