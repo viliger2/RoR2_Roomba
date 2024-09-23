@@ -1,4 +1,9 @@
 <details>
+<summary>1.0.6 </summary>
+
+* Fixed an issue when changing language\loading the game with language that is not supported by the mod.
+</details>
+<details>
 <summary>1.0.5 </summary>
 
 * Roomba will now teleport back to stage if it falls out of bounds.
