@@ -8,7 +8,7 @@ namespace RoR2_Roomba.States
 {
     public class WanderFar : Wander
     {
-        public static float refreshTime = 15f;
+        public static float refreshTime => RoombaConfigs.TargetRefreshTimer.Value;
         private float refreshTimer;
 
         public override void OnEnter()

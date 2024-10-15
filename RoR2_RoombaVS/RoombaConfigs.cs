@@ -12,6 +12,7 @@ namespace RoR2_Roomba
         public static ConfigEntry<float> RoombaTVWeight;
         public static ConfigEntry<bool> CustomItems;
         public static ConfigEntry<bool> RoombaCanDropItems;
+        public static ConfigEntry<float> TargetRefreshTimer;
 
         public static ConfigEntry<float> MaxwellExplosionChance;
         public static ConfigEntry<float> MaxwellExplosionDamage;
@@ -32,6 +33,7 @@ namespace RoR2_Roomba
             RoombaTVWeight = Config.Bind("Roomba", "Roomba with TV Weight", 4f, "Weight chance of Roomba with TV on it. Set to 0 to disable.");
             CustomItems = Config.Bind("Items", "Enable Custom Items", true, "Enable custom items.");
             RoombaCanDropItems = Config.Bind("Items", "Roomba Drops Normal Chest Items", true, "Roomba will drop items. It will drop item equal to normal chest, if you want to disable custom drops, uncheck Enable Custom Items.");
+            TargetRefreshTimer = Config.Bind("Roomba", "Target Refresh Timer", 30f, "How frequently Roomba refreshes its target to go to.");
 
             MaxwellExplosionChance = Config.Bind("Maxwell", "Maxwell Proc Chance", 5f, "Chance to spawn Evil Maxwell.");
             MaxwellExplosionDamage = Config.Bind("Maxwell", "Maxwell Explosion Damage", 600f, "Damage of Evil Maxwell explosion, in percent of total damage.");

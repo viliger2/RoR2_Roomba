@@ -178,37 +178,48 @@ namespace RoR2_Roomba
             #endregion
 
             #region KinematicCharacterMotor
+            var capsuleCollider = roombaPrefab.GetComponent<CapsuleCollider>();
+
             var kinematicCharacterMotor = roombaPrefab.AddComponent<KinematicCharacterMotor>();
             kinematicCharacterMotor.CharacterController = characterMotor;
-            kinematicCharacterMotor.Capsule = roombaPrefab.GetComponent<CapsuleCollider>();
+            kinematicCharacterMotor.Capsule = capsuleCollider;
             kinematicCharacterMotor._attachedRigidbody = roombaPrefab.GetComponent<Rigidbody>();
+            kinematicCharacterMotor.CapsuleRadius = capsuleCollider.radius;
+            kinematicCharacterMotor.CapsuleHeight = capsuleCollider.height;
+            if (capsuleCollider.center != Vector3.zero)
+            {
+                Log.Error("CapsuleCollider for " + roombaPrefab + " has non-zero center. This WILL result in pathing issues for AI.");
+            }
+            kinematicCharacterMotor.CapsuleYOffset = 0f;
 
-            // new shit
+            kinematicCharacterMotor.GroundDetectionExtraDistance = 0f;
+            kinematicCharacterMotor.MaxStableSlopeAngle = 55f;
             kinematicCharacterMotor.StableGroundLayers = LayerIndex.world.mask;
+            kinematicCharacterMotor.DiscreteCollisionEvents = false;
+
+            kinematicCharacterMotor.StepHandling = StepHandlingMethod.Standard;
+            kinematicCharacterMotor.MaxStepHeight = 0.2f;
             kinematicCharacterMotor.AllowSteppingWithoutStableGrounding = false;
+            kinematicCharacterMotor.MinRequiredStepDepth = 0.1f;
+
             kinematicCharacterMotor.LedgeAndDenivelationHandling = true;
+            kinematicCharacterMotor.MaxStableDistanceFromLedge = 0.5f;
+            kinematicCharacterMotor.MaxVelocityForLedgeSnap = 0f;
+            kinematicCharacterMotor.MaxStableDenivelationAngle = 55f;
+
+            kinematicCharacterMotor.InteractiveRigidbodyHandling = true;
+            kinematicCharacterMotor.RigidbodyInteractionType= RigidbodyInteractionType.None;
             kinematicCharacterMotor.SimulatedCharacterMass = 1f;
+            kinematicCharacterMotor.PreserveAttachedRigidbodyMomentum = true;
+
+            kinematicCharacterMotor.HasPlanarConstraint = false;
+            kinematicCharacterMotor.PlanarConstraintAxis = Vector3.forward;
+
             kinematicCharacterMotor.CheckMovementInitialOverlaps = true;
             kinematicCharacterMotor.KillVelocityWhenExceedMaxMovementIterations = true;
             kinematicCharacterMotor.KillRemainingMovementWhenExceedMaxMovementIterations = true;
-            kinematicCharacterMotor.DiscreteCollisionEvents = false;
-            // end new shit
-
-            kinematicCharacterMotor.CapsuleRadius = 1f;
-            kinematicCharacterMotor.CapsuleHeight = 1f;
-            kinematicCharacterMotor.CapsuleYOffset = 0f;
-
-            kinematicCharacterMotor.MaxStepHeight = 0.4f;
-            kinematicCharacterMotor.MinRequiredStepDepth = 0.1f;
-            kinematicCharacterMotor.MaxStableSlopeAngle = 55f;
-            kinematicCharacterMotor.MaxStableDistanceFromLedge = 0.5f;
-            kinematicCharacterMotor.MaxStableDenivelationAngle = 55f;
-
-            kinematicCharacterMotor.RigidbodyInteractionType = RigidbodyInteractionType.None;
-            kinematicCharacterMotor.PreserveAttachedRigidbodyMomentum = true;
-
-            kinematicCharacterMotor.StepHandling = StepHandlingMethod.Standard;
-            kinematicCharacterMotor.InteractiveRigidbodyHandling = true;
+            kinematicCharacterMotor.timeUntilUpdate = 0f;
+            kinematicCharacterMotor.playerCharacter = false;
             #endregion
 
             #region DropItemOnDeath
