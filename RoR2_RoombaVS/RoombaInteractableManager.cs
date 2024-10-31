@@ -8,6 +8,9 @@ namespace RoR2_Roomba
 {
     public class RoombaInteractableManager : NetworkBehaviour, IInteractable
     {
+        [SyncVar]
+        public bool available;
+
         public CharacterBody body;
 
         public GameObject smokeBombPrefab;
@@ -21,11 +24,27 @@ namespace RoR2_Roomba
 
         public Interactability GetInteractability([NotNull] Interactor activator)
         {
-            int count = activator?.GetComponent<CharacterBody>()?.inventory?.GetItemCount(ContentProvider.Items.PileOfDirt) ?? 0;
+            if (!available)
+            {
+                return Interactability.Disabled;
+            }
+
+            if (!activator || !activator.TryGetComponent<CharacterBody>(out var characterBody))
+            {
+                return Interactability.Disabled;
+            }
+
+            if(!characterBody.inventory)
+            {
+                return Interactability.Disabled;
+            }
+
+            int count = characterBody.inventory.GetItemCount(ContentProvider.Items.PileOfDirt);
             if (count > 0)
             {
                 return Interactability.Available;
             }
+
             return Interactability.Disabled;
         }
 
@@ -36,8 +55,9 @@ namespace RoR2_Roomba
                 return;
             }
 
-            if (body && body.healthComponent)
+            if (body && body.healthComponent && available)
             {
+                available = false;
                 body.AddBuff(RoR2Content.Buffs.Slow80);
                 interactor = activator?.GetComponent<CharacterBody>();
                 interactor?.inventory?.RemoveItem(ContentProvider.Items.PileOfDirt);

@@ -120,7 +120,6 @@ namespace RoR2_Roomba.Items
             return card;
         }
 
-
         public static ItemDef CreateItemDef(GameObject pilePickup, Material glassMaterial, Sprite icon)
         {
             pilePickup.transform.Find("mdlPileOfDirt/Glass1").gameObject.GetComponent<MeshRenderer>().material = glassMaterial;
