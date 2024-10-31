@@ -1,4 +1,15 @@
 <details>
+<summary>1.0.8 </summary>
+
+* Fixed Roomba interactable component not disabling itself after single use.
+</details>
+<details>
+<summary>1.0.7 </summary>
+
+* Fixed Roomba's pathfinding, for real this time.
+* Exposed pathfinding target reacquisition timer to config.With pathfinding fixed Roomba now gets new target to go to every 30 seconds instead of 15 seconds.
+</details>
+<details>
 <summary>1.0.6 </summary>
 
 * Fixed an issue when changing language\loading the game with language that is not supported by the mod.
