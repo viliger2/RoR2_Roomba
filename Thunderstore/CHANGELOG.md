@@ -1,4 +1,9 @@
 <details>
+<summary>1.0.9 </summary>
+
+* Fixed Roomba being non-interactable due to fixed in 1.0.8, sorry about that.
+</details>
+<details>
 <summary>1.0.8 </summary>
 
 * Fixed Roomba interactable component not disabling itself after single use.

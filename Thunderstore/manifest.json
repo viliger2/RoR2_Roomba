@@ -1,6 +1,6 @@
 {
     "name": "Roomba",
-    "version_number": "1.0.8",
+    "version_number": "1.0.9",
     "website_url": "https://github.com/viliger2/RoR2_Roomba",
     "description": "Is that... a roomba? Must've fallen out of UES Contact Light.",
     "dependencies": [

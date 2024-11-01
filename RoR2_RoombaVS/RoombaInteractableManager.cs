@@ -17,6 +17,11 @@ namespace RoR2_Roomba
 
         private CharacterBody interactor;
 
+        public void Awake()
+        {
+            available = true;
+        }
+
         public string GetContextString([NotNull] Interactor activator)
         {
             return RoR2.Language.GetString("ROOMBA_INTERACTABLE_ROOMBA_CONTEXT");

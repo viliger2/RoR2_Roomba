@@ -18,7 +18,7 @@ namespace RoR2_Roomba
     {
         public const string Author = "Viliger";
         public const string ModName = "Roomba";
-        public const string Version = "1.0.8";
+        public const string Version = "1.0.9";
         public const string GUID = "com." + Author + "." + ModName;
 
         private void Awake()
