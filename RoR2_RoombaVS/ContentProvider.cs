@@ -131,11 +131,14 @@ namespace RoR2_Roomba
                 if (RoombaConfigs.CustomItems.Value)
                 {
                     #region Maxwell
+                    RoR2_Roomba.Items.Maxwell.MaxwellProcType = ProcTypeAPI.ReserveProcType();
+
                     var explosionCopy = PrefabAPI.InstantiateClone(grenadeExplosion.Result, "MaxwellExplosionEffect", false);
                     explosionCopy.GetComponent<EffectComponent>().soundName = "Roomba_HL_Explosion_Play";
 
                     var maxwellPickUp = assets.First(pickup => pickup.name == "PickupMaxwell");
                     Items.Maxwell = Maxwell.CreateItemDef(maxwellPickUp, maxwellIcon);
+                   
                     var evilMaxwell = assets.First(prefab => prefab.name == "EvilMaxwellPrefab");
                     Maxwell.EvilMaxwellPrefab = Maxwell.CreateEvilMaxwellPrefab(evilMaxwell, explosionCopy);
                     #endregion

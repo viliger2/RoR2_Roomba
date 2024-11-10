@@ -14,11 +14,12 @@ namespace RoR2_Roomba
     [BepInPlugin(GUID, ModName, Version)]
     [BepInDependency(R2API.RecalculateStatsAPI.PluginGUID)]
     [BepInDependency(R2API.PrefabAPI.PluginGUID)]
+    [BepInDependency(R2API.ProcTypeAPI.PluginGUID)]
     public class RoombaPlugin : BaseUnityPlugin
     {
         public const string Author = "Viliger";
         public const string ModName = "Roomba";
-        public const string Version = "1.0.9";
+        public const string Version = "1.0.10";
         public const string GUID = "com." + Author + "." + ModName;
 
         private void Awake()
