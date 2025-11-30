@@ -19,7 +19,7 @@ namespace RoR2_Roomba
     {
         public const string Author = "Viliger";
         public const string ModName = "Roomba";
-        public const string Version = "1.0.10";
+        public const string Version = "1.0.11";
         public const string GUID = "com." + Author + "." + ModName;
 
         private void Awake()
@@ -143,7 +143,7 @@ namespace RoR2_Roomba
                 var master = result.spawnedInstance.GetComponent<CharacterMaster>();
                 if(master && master.inventory)
                 {
-                    master.inventory.GiveItem(RoR2.RoR2Content.Items.TeleportWhenOob);
+                    master.inventory.GiveItemPermanent(RoR2.RoR2Content.Items.TeleportWhenOob);
                 }
             }
         }

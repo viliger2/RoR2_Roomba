@@ -44,7 +44,7 @@ namespace RoR2_Roomba
                 return Interactability.Disabled;
             }
 
-            int count = characterBody.inventory.GetItemCount(ContentProvider.Items.PileOfDirt);
+            int count = characterBody.inventory.GetItemCountEffective(ContentProvider.Items.PileOfDirt);
             if (count > 0)
             {
                 return Interactability.Available;
@@ -60,15 +60,30 @@ namespace RoR2_Roomba
                 return;
             }
 
-            if (body && body.healthComponent && available)
+            if (body && body.healthComponent && available && activator)
             {
                 available = false;
                 body.AddBuff(RoR2Content.Buffs.Slow80);
-                interactor = activator?.GetComponent<CharacterBody>();
-                interactor?.inventory?.RemoveItem(ContentProvider.Items.PileOfDirt);
-                EntitySoundManager.EmitSoundServer((AkEventIdArg)"Roomba_Breaking_Play", body.gameObject);
-                Invoke("SpawnSmokeEffect", 4f);
-                Invoke("DestroyRoomba", 5f);
+                interactor = activator.GetComponent<CharacterBody>();
+                if (interactor && interactor.inventory)
+                {
+                    var itemTransformation = new RoR2.Inventory.ItemTransformation()
+                    {
+                        maxToTransform = 1,
+                        minToTransform = 1,
+                        originalItemIndex = ContentProvider.Items.PileOfDirt.itemIndex,
+                        newItemIndex = ItemIndex.None,
+                        forbidPermanentItems = false,
+                        forbidTempItems = false,
+                        allowWhenDisabled = true
+                    };
+                    if (itemTransformation.TryTransform(interactor.inventory, out var result))
+                    {
+                        EntitySoundManager.EmitSoundServer((AkEventIdArg)"Roomba_Breaking_Play", body.gameObject);
+                        Invoke("SpawnSmokeEffect", 4f);
+                        Invoke("DestroyRoomba", 5f);
+                    }
+                }
             }
         }
 

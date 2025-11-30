@@ -7,7 +7,6 @@ using RoR2_Roomba.States;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
-using static RoR2.Skills.ComboSkillDef;
 
 namespace RoR2_Roomba
 {

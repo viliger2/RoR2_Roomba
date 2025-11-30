@@ -128,13 +128,17 @@ namespace RoR2_Roomba.Items
 
             ItemDef itemDef = ScriptableObject.CreateInstance<ItemDef>();
             itemDef.tier = ItemTier.Boss;
+#pragma warning disable CS0618 // Type or member is obsolete
             itemDef.deprecatedTier = ItemTier.Boss;
+#pragma warning restore CS0618 // Type or member is obsolete
             itemDef.name = "PileOfDirt";
             itemDef.nameToken = "ROOMBA_ITEM_PILE_OF_DIRT_NAME";
             itemDef.pickupToken = "ROOMBA_ITEM_PILE_OF_DIRT_PICKUP";
             itemDef.descriptionToken = "ROOMBA_ITEM_PILE_OF_DIRT_DESCRIPTION";
             itemDef.loreToken = "ROOMBA_ITEM_PILE_OF_DIRT_LORE";
+#pragma warning disable CS0618 // Type or member is obsolete
             itemDef.pickupModelPrefab = pilePickup;
+#pragma warning restore CS0618 // Type or member is obsolete
             itemDef.canRemove = true;
             itemDef.tags = new ItemTag[] { ItemTag.WorldUnique, ItemTag.CannotSteal, ItemTag.CannotDuplicate, ItemTag.CannotCopy, ItemTag.AIBlacklist, ItemTag.BrotherBlacklist };
             itemDef.pickupIconSprite = icon;

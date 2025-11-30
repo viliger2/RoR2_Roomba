@@ -1,4 +1,14 @@
 <details>
+<summary>1.0.11</summary>
+
+* AC update.
+</details>
+<details>
+<summary>1.0.10</summary>
+
+* Added ProcTypeAPI support.
+</details>
+<details>
 <summary>1.0.9 </summary>
 
 * Fixed Roomba being non-interactable due to fixed in 1.0.8, sorry about that.

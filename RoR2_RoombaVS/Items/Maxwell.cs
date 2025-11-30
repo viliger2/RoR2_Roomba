@@ -28,13 +28,17 @@ namespace RoR2_Roomba.Items
 
             ItemDef itemDef = ScriptableObject.CreateInstance<ItemDef>();
             itemDef.tier = ItemTier.Tier3;
+#pragma warning disable CS0618 // Type or member is obsolete
             itemDef.deprecatedTier = ItemTier.Tier3;
+#pragma warning restore CS0618 // Type or member is obsolete
             itemDef.name = "Maxwell";
             itemDef.nameToken = "ROOMBA_ITEM_MAXWELL_NAME";
             itemDef.pickupToken = "ROOMBA_ITEM_MAXWELL_PICKUP";
             itemDef.descriptionToken = "ROOMBA_ITEM_MAXWELL_DESCRIPTION";
             itemDef.loreToken = "ROOMBA_ITEM_MAXWELL_LORE";
+#pragma warning disable CS0618 // Type or member is obsolete
             itemDef.pickupModelPrefab = maxwellPickupItem;
+#pragma warning restore CS0618 // Type or member is obsolete
             itemDef.canRemove = true;
             itemDef.pickupIconSprite = icon;
             itemDef.tags = new ItemTag[] { ItemTag.WorldUnique };
@@ -81,7 +85,7 @@ namespace RoR2_Roomba.Items
 
             if (!damageInfo.procChainMask.HasModdedProc(MaxwellProcType))
             {
-                var maxwellCount = attackerBody.master.inventory.GetItemCount(ContentProvider.Items.Maxwell);
+                var maxwellCount = attackerBody.master.inventory.GetItemCountEffective(ContentProvider.Items.Maxwell);
                 if (maxwellCount > 0 && Util.CheckRoll((RoombaConfigs.MaxwellExplosionChance.Value) * damageInfo.procCoefficient, attackerBody.master))
                 {
                     Vector3 victimCorePosition = victim.GetComponent<CharacterBody>().corePosition;

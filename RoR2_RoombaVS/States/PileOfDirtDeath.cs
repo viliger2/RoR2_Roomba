@@ -11,7 +11,7 @@ namespace RoR2_Roomba.States
             base.OnEnter();
 
             Vector3 vector = (Vector3.up * 20f + Vector3.forward * 5f);
-            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(ContentProvider.Items.PileOfDirt.itemIndex), transform.position + Vector3.up * 3f, vector);
+            PickupDropletController.CreatePickupDroplet(new UniquePickup(PickupCatalog.FindPickupIndex(ContentProvider.Items.PileOfDirt.itemIndex)), transform.position + Vector3.up * 3f, vector, false);
 
             EntityState.Destroy(gameObject);
         }

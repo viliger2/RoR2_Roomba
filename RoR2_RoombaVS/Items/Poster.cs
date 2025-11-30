@@ -21,13 +21,17 @@ namespace RoR2_Roomba.Items
 
             ItemDef itemDef = ScriptableObject.CreateInstance<ItemDef>();
             itemDef.tier = ItemTier.Tier2;
+#pragma warning disable CS0618 // Type or member is obsolete
             itemDef.deprecatedTier = ItemTier.Tier2;
+#pragma warning restore CS0618 // Type or member is obsolete
             itemDef.name = "Poster";
             itemDef.nameToken = "ROOMBA_ITEM_POSTER_NAME";
             itemDef.pickupToken = "ROOMBA_ITEM_POSTER_PICKUP";
             itemDef.descriptionToken = "ROOMBA_ITEM_POSTER_DESCRIPTION";
             itemDef.loreToken = "ROOMBA_ITEM_POSTER_LORE";
+#pragma warning disable CS0618 // Type or member is obsolete
             itemDef.pickupModelPrefab = posterPickup;
+#pragma warning restore CS0618 // Type or member is obsolete
             itemDef.canRemove = true;
             itemDef.pickupIconSprite = icon;
             itemDef.tags = new ItemTag[] { ItemTag.WorldUnique };
@@ -39,7 +43,7 @@ namespace RoR2_Roomba.Items
         {
             if (sender && sender.inventory)
             {
-                var count = sender.inventory.GetItemCount(ContentProvider.Items.Poster);
+                var count = sender.inventory.GetItemCountEffective(ContentProvider.Items.Poster);
                 if (count > 0)
                 {
                     args.damageMultAdd += RoombaConfigs.PosterDamageAdd.Value / 100 + RoombaConfigs.PosterDamageAddPerStack.Value / 100 * (count - 1);
