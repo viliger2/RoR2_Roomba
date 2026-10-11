@@ -106,7 +106,7 @@ namespace RoR2_Roomba.Items
 
         public static SpawnCard CreatePileOfDirtSpawnCard(GameObject pileOfDirtPrefab)
         {
-            var card = ScriptableObject.CreateInstance<SpawnCard>();
+            var card = ScriptableObject.CreateInstance<InteractableSpawnCard>();
 
             card.prefab = pileOfDirtPrefab;
             card.sendOverNetwork = true;
@@ -116,6 +116,7 @@ namespace RoR2_Roomba.Items
             card.forbiddenFlags = RoR2.Navigation.NodeFlags.NoChestSpawn;
             card.directorCreditCost = 1;
             card.occupyPosition = false;
+            card.orientToFloor = true;
 
             return card;
         }

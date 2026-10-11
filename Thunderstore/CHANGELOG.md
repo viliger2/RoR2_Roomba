@@ -1,4 +1,11 @@
 <details>
+<summary>1.0.12</summary>
+
+* Recompiled for HC.
+* Updated dependencies.
+* Pile of Trash is now normalized to the floor.
+</details>
+<details>
 <summary>1.0.11</summary>
 
 * AC update.
